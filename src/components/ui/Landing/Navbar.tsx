@@ -38,6 +38,9 @@ const Navbar = () => {
           <li>
             <a href="#contacto">Contacto</a>
           </li>
+          <li>
+            <a href="/seguimiento">Seguimiento</a>
+          </li>
         </ul>
 
         {/* Botón de Menú para pantallas pequeñas */}

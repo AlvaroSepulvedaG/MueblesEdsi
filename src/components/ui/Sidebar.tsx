@@ -10,6 +10,8 @@ import {
   FaSignOutAlt,
   FaChevronLeft,
   FaChevronRight,
+  FaParachuteBox,
+  FaCoins,
 } from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
@@ -93,6 +95,16 @@ const Sidebar: React.FC = () => {
         <NavItem
           href="/comenunca/orders"
           icon={<FaChartLine size={40} />}
+          text={isOpen ? "Ventas" : ""}
+        />
+        <NavItem
+          href="/comenunca/clientes_copy"
+          icon={<FaParachuteBox size={40} />}
+          text={isOpen ? "Proveedor" : ""}
+        />
+        <NavItem
+          href="/comenunca/clientes_copy"
+          icon={<FaCoins size={40} />}
           text={isOpen ? "Ventas" : ""}
         />
         <NavItem
