@@ -21,9 +21,7 @@ const AboutMe = () => {
             Sobre nosotros
           </h3>
           <p className="lg:leading-9 lg:text-[16px] text-sm">
-            Con más de 30 años de experiencia construyendo los muebles que le
-            dan vida a tu hogar puedes confiar en nosotros para llevar a cabo
-            los proyectos de amoblado que tengas en mente.
+            Aquí podrás seguir el estado de tu pedido. Por favor, ingresa tu RUT y el número de pedido.
           </p>
           <p className="lg:leading-9 lg:text-[16px] text-sm">
             ¡Te acompañamos en todo el proceso desde la toma de medidas hasta la
