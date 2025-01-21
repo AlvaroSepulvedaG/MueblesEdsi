@@ -92,3 +92,4 @@ export const columns: ColumnDef<Compras, unknown>[] = [
     cell: ({ row }) => <ClientActions cliente={row.original} />,
   },
 ];
+*/
