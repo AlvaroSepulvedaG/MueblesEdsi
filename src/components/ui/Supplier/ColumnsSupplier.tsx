@@ -179,7 +179,6 @@ const SupplierActions = ({ proveedor }: { proveedor: Proveedores }) => {
   );
 };
 
-// Función para formatear el RUT
 
 // Definición de columnas
 export const columns: ColumnDef<Proveedores>[] = [
