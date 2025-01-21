@@ -98,12 +98,12 @@ const Sidebar: React.FC = () => {
           text={isOpen ? "Ventas" : ""}
         />
         <NavItem
-          href="/comenunca/clientes_copy"
+          href="/comenunca/proveedores"
           icon={<FaParachuteBox size={40} />}
           text={isOpen ? "Proveedor" : ""}
         />
         <NavItem
-          href="/comenunca/clientes_copy"
+          href="/comenunca/compras"
           icon={<FaCoins size={40} />}
           text={isOpen ? "Ventas" : ""}
         />

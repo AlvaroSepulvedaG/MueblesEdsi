@@ -40,6 +40,24 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   rutCliente?: string;
 }
+
+//compras
+export type Compras = {
+  rut_proveedor: string;
+  nombre_proveedor: string;
+  telefono_proveedor: number;
+  correo_proveedor: string;
+  num_compra: number; 
+  monto_compra: number;
+  fecha_compra: string;
+};
+
+interface DataTablePropsCompras<TValue> {
+  columns: Compras;
+  data: Compras[];
+  rutProveedor?: string;
+}
+
 // Función para formatear el RUT
 const formatRut = (rut: string | undefined) => {
   if (!rut) return "";
