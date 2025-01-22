@@ -16,7 +16,7 @@ const Tracking = () => {
 
     try {
       const response = await fetch(
-        `/api/seguimiento?rut=${rut}&pedido=${pedido}`
+        `/api/seguimiento?rut=${rut.replace(/[^0-9kK]/g, '')}&pedido=${pedido}`
       );
 
       if (!response.ok) {
@@ -29,6 +29,25 @@ const Tracking = () => {
     } catch (err) {
       setError(err.message);
     }
+  };
+
+  const formatearRUT = (valor) => {
+    // Elimina caracteres no válidos
+    let limpio = valor.replace(/[^0-9kK]/g, '').toUpperCase();
+
+    // Aplica formato si tiene más de un carácter
+    if (limpio.length > 1) {
+      const cuerpo = limpio.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      const dv = limpio.slice(-1);
+      return `${cuerpo}-${dv}`;
+    }
+
+    return limpio; // Devuelve el valor limpio si es corto
+  };
+
+  const handleRutChange = (e) => {
+    const input = e.target.value;
+    setRut(formatearRUT(input));
   };
 
   return (
@@ -115,7 +134,7 @@ const Tracking = () => {
                   placeholder="Rut"
                   name="rut"
                   value={rut}
-                  onChange={(e) => setRut(e.target.value)}
+                  onChange={handleRutChange}
                   required
                   className="p-3 bg-white rounded-lg shadow-md outline-none border border-gray-300 focus:ring-2 focus:ring-orange-500"
                 />
