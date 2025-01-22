@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Navbar from "../Landing/Navbar";
 
 const Tracking = () => {
   const [rut, setRut] = useState("");
@@ -53,49 +54,7 @@ const Tracking = () => {
   return (
     <div className="min-h-screen flex flex-col justify-between text-gray-900">
       {/* Encabezado */}
-      <header className="bg-gray-100 shadow-lg py-4">
-        <div className="container mx-auto flex justify-between items-center px-4">
-          <div className="flex items-center">
-            <Image
-              src="/logo.png"
-              alt="Logo Muebles EDSI"
-              width={50}
-              height={50}
-              className="mr-3"
-            />
-            <span className="text-xl font-bold text-gray-700">
-            </span>
-          </div>
-          <nav className="hidden md:flex space-x-6">
-            <Link
-              href="/#sobreMi"
-              className="text-md font-semibold text-gray-600 hover:text-orange-500 transition"
-            >
-              Sobre Nosotros
-            </Link>
-            <Link
-              href="/#galeria"
-              className="text-md font-semibold text-gray-600 hover:text-orange-500 transition"
-            >
-              Portafolio
-            </Link>
-            <Link
-              href="/#contacto"
-              className="text-md font-semibold text-gray-600 hover:text-orange-500 transition"
-            >
-              Contacto
-            </Link>
-          </nav>
-          <div className="flex space-x-4">
-            <Link
-              href="/"
-              className="py-2 px-4 border border-gray-300 text-gray-600 font-semibold rounded hover:bg-gray-100 transition"
-            >
-              Volver
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Contenido Principal */}
       <main
@@ -104,7 +63,7 @@ const Tracking = () => {
       >
         <div className="absolute inset-0 bg-cover bg-center"
           style={{ 
-            backgroundImage: "url('/background.jpg')", 
+            backgroundImage: "url('/hero.png')", 
             filter: "blur(1px)",
             zIndex: -1
           }}
