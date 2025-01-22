@@ -25,6 +25,7 @@ const CompraSchema = z.object({
     .number()
 });
 
+export default CompraSchema;
 /* Validación condicional
 const CompraSchemaWithContext = CompraSchema.refine(
   (data) => {
