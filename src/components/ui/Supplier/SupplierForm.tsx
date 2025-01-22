@@ -104,7 +104,7 @@ export function SupplierForm({
 
       const data = await response.json();
       console.log(`Proveedor ${rut_proveedor ? "actualizado" : "agregado"}:`, data);
-      setModalMessage(`Cliente ${rut_proveedor ? "actualizado" : "agregado"}`);
+      setModalMessage(`Proveedor ${rut_proveedor ? "actualizado" : "agregado"}`);
       setShowModal(true);
       if (onComplete) {
         onComplete();

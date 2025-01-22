@@ -179,6 +179,22 @@ const SupplierActions = ({ proveedor }: { proveedor: Proveedores }) => {
   );
 };
 
+// Función para formatear el RUT
+const formatRut = (rut_proveedor: string) => {
+  // Remueve puntos y guiones
+  let cleanRut = rut_proveedor.replace(/\./g, "").replace(/-/g, "");
+
+  // Asegúrate de que tenga al menos 8 caracteres para evitar errores
+  if (cleanRut.length < 8) return rut_proveedor;
+
+  // Obtén el número y el dígito verificador
+  const number = cleanRut.slice(0, -1);
+  const verifier = cleanRut.slice(-1);
+
+  // Formatea el número con puntos y agrega el dígito verificador con un guión
+  return `${number.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}-${verifier}`;
+};
+
 
 // Definición de columnas
 export const columns: ColumnDef<Proveedores>[] = [
@@ -201,7 +217,7 @@ export const columns: ColumnDef<Proveedores>[] = [
   {
     accessorKey: "rut_proveedor",
     header: "RUT",
-    cell: ({ row }) => row.original.rut_proveedor
+    cell: ({ row }) => formatRut(row.original.rut_proveedor)
   },
   {
     accessorKey: "telefono_proveedor",
@@ -212,7 +228,19 @@ export const columns: ColumnDef<Proveedores>[] = [
     },
   },
   {
+    accessorKey: "correo_proveedor",
+    header: "Correo",
+    cell: ({ row }) => {
+      const correo = row.original.correo_proveedor;
+      return correo ? correo.toString() : "Sin teléfono";
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => <SupplierActions proveedor={row.original} />,
   },
+
+ 
 ];
+
+//fin
