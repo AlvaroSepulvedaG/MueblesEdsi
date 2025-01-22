@@ -1,5 +1,6 @@
 "use client";
 
+
 import Seguimiento from "@/components/ui/Seguimiento/Tracking";
 
 
