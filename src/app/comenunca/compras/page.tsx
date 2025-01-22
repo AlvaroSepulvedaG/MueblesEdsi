@@ -1,3 +1,5 @@
+//WIP
+
 import { columns, Pedido } from "@/components/ui/Ventas/ColumnsOrders";
 import pool from "@/lib/db"; // Conexion a BDD
 
@@ -40,3 +42,6 @@ export default async function Clientes() {
     </div>
   );
 }
+
+
+//wip
