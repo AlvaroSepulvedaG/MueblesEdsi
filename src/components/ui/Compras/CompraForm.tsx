@@ -66,15 +66,11 @@ export function CompraForm({
       tipoDocumento: Documento_id_tipo_documento || undefined,
     },
   });
-  const { fields, append, remove } = useFieldArray({
-    control: form.control,
-    name: "items",
-  });
 
   async function onSubmit(values: z.infer<typeof CompraSchema>) {
     try {
       // Determinar si es una nueva orden o una actualización
-      const isUpdating = isEditable && values.num_compra;
+      const isUpdating = isEditable && values.numCompra;
 
       if (isUpdating) {
         // Actualizar venta
