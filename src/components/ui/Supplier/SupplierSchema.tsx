@@ -19,10 +19,6 @@ const SupplierSchema = z.object({
     .email({ message: "Correo inválido" })
     .min(6, { message: "Demasiado corto" })
     .max(50, { message: "Máximo 50 caracteres" }),
-  comentarios: z
-    .string()
-    .max(1000, { message: "Máximo 1000 caracteres" })
-    .optional(),
 });
 
 export default SupplierSchema;

@@ -16,11 +16,11 @@ export async function GET(request: NextRequest) {
 
     if (rut_proveedor) {
       
-      query = "SELECT * FROM public.proveedor WHERE rut_proveedor = $1 ORDER BY rut DESC";
+      query = "SELECT * FROM public.proveedor WHERE rut_proveedor = $1 ORDER BY rut_proveedor DESC";
       values = [rut_proveedor];
     } else {
       // Si no hay un 'rut', construir la consulta sin parámetros
-      query = "SELECT * FROM proveedor ORDER BY rut DESC";
+      query = "SELECT * FROM proveedor ORDER BY rut_proveedor DESC";
       values = undefined; // No pasaremos valores en este caso
     }
 

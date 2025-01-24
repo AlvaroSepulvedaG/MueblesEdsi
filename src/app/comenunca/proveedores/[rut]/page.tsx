@@ -6,7 +6,7 @@ async function getData(rut_proveedor: string): Promise<Proveedores | undefined> 
   try {
     const client = await pool.connect();
     const res = await client.query(
-      "SELECT * FROM public.proveedor WHERE rut = $1",
+      "SELECT * FROM public.proveedor WHERE rut_proveedor = $1",
       [rut_proveedor]
     );
     client.release();
