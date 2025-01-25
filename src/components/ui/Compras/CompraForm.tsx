@@ -34,7 +34,7 @@ interface CompraFormProps {
   fecha_compra?: Date;
   proveedor_rut_proveedor?: string;
   nombre_tipo_documento?: string,
-  tipo_documento_id_tipo_documento: number;
+  tipo_documento_id_tipo_documento?: number;
   isEditable?: boolean;
   onComplete?: () => void;
 }
