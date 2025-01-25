@@ -1,7 +1,5 @@
-// src/app/api/updateVenta/route.ts
 import { NextResponse } from "next/server";
-import pool from "@/lib/db"; // Asegúrate de que la ruta de la conexión esté bien configurada
-
+import pool from "@/lib/db"; 
 // Define una interfaz para los datos de la venta
 interface VentaData {
   id_detalle_venta: number;

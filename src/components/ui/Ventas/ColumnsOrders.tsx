@@ -59,6 +59,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   rutCliente?: string;
 }
+
 // Función para formatear el RUT
 const formatRut = (rut: string | undefined) => {
   if (!rut) return "";
@@ -223,6 +224,8 @@ const ClientActions = ({ cliente }: { cliente: Pedido }) => {
 
 // Definición de columnas
 export const columns: ColumnDef<Pedido>[] = [
+
+  { accessorKey: "num_venta", header: "N° pedido" },
   {
     accessorKey: "cliente_rut",
     cell: ({ row }) => formatRut(row.original.cliente_rut),

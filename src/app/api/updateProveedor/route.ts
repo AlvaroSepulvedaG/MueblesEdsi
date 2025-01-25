@@ -28,10 +28,10 @@ export async function PUT(req: Request) {
       const queryProveedor = `
         UPDATE public.proveedor
         SET
-          rut_proveedor = COALESCE($2, rut),
+          rut_proveedor = COALESCE($2, rut_proveedor),
           nombre_proveedor = COALESCE($3, nombre_proveedor),
           telefono_proveedor = COALESCE($4, telefono_proveedor),
-          correo_proveedor = COALESCE($5, correo_proveedor),
+          correo_proveedor = COALESCE($5, correo_proveedor)
         WHERE rut_proveedor = $1
         RETURNING *
       `;
@@ -40,8 +40,8 @@ export async function PUT(req: Request) {
         rut_proveedor,
         nuevoRut || rut_proveedor,
         nombre_proveedor,
-        correo_proveedor,
         telefono_proveedor,
+        correo_proveedor,
       ];
 
       const { rows } = await client.query(queryProveedor, valuesProveedor);

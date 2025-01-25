@@ -33,7 +33,8 @@ interface CompraFormProps {
   folio_documento?: number;
   fecha_compra?: Date;
   proveedor_rut_proveedor?: string;
-  Documento_id_tipo_documento?: number;
+  nombre_tipo_documento?: string,
+  tipo_documento_id_tipo_documento: number;
   isEditable?: boolean;
   onComplete?: () => void;
 }
@@ -45,7 +46,11 @@ export function CompraForm({
   folio_documento,
   fecha_compra,
   proveedor_rut_proveedor,
-  Documento_id_tipo_documento,
+  tipo_documento_id_tipo_documento,
+  nombre_proveedor,
+  telefono_proveedor,
+  correo_proveedor,
+  nombre_tipo_documento,
   isEditable = false,
   onComplete,
 }: CompraFormProps) {
@@ -63,12 +68,22 @@ export function CompraForm({
       folioDocumento: folio_documento || undefined,
       fechaCompra: fecha_compra || undefined,
       rutProveedor: proveedor_rut_proveedor || "",
-      tipoDocumento: Documento_id_tipo_documento || undefined,
+      tipoDocumento: tipo_documento_id_tipo_documento || undefined,
     },
   });
 
   async function onSubmit(values: z.infer<typeof CompraSchema>) {
     try {
+
+       // Convertir los valores de folioDocumento y tipoDocumento a números
+       const updatedValues = {
+        ...values,
+      folioDocumento: values.folioDocumento ? Number(values.folioDocumento) : undefined,
+      tipoDocumento: values.tipoDocumento ? Number(values.tipoDocumento) : undefined,
+      rutProveedor: values.rutProveedor?.trim() || null,
+
+    };
+      
       // Determinar si es una nueva orden o una actualización
       const isUpdating = isEditable && values.numCompra;
 
@@ -84,7 +99,7 @@ export function CompraForm({
             folio_documento: values.folioDocumento,
             fecha_compra: values.fechaCompra,
             proveedor_rut_proveedor: values.rutProveedor,
-            Documento_id_tipo_documento: values.tipoDocumento,
+            tipo_documento_id_tipo_documento: values.tipoDocumento,
           }),
         });
 
@@ -105,7 +120,7 @@ export function CompraForm({
             folio_documento: values.folioDocumento,
             fecha_compra: values.fechaCompra,
             proveedor_rut_proveedor: values.rutProveedor,
-            Documento_id_tipo_documento: values.tipoDocumento,
+            tipo_documento_id_tipo_documento: values.tipoDocumento,
           }),
         });
 
@@ -153,7 +168,10 @@ export function CompraForm({
                   <Input
                     placeholder="RUT Proveedor"
                     {...field}
-                    disabled={true}
+                    onChange={(e) => field.onChange(e.target.value.trim())}
+                    disabled
+
+                    
                   />
                 </FormControl>
                 <FormMessage />
@@ -209,7 +227,9 @@ export function CompraForm({
                     <FormControl>
                       <Input
                         {...field}
+                        type="number"
                         placeholder="Ingrese el número de folio del documento de compra"
+                        onChange={(e) => field.onChange(Number(e.target.value))}
                       />
                     </FormControl>
                     <FormMessage />
@@ -242,14 +262,32 @@ export function CompraForm({
                   <FormItem>
                     <FormLabel>Boleta o Factura</FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="Ingrese si es boleta o factura"
-                        {...field}
-                      />
+                      <div className="flex space-x-4">
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            value={1}
+                            checked={field.value === 1}
+                            onChange={(e) => field.onChange(Number(e.target.value))}
+                            className="form-radio"
+                          />
+                          <span>Boleta</span>
+                        </label>
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            value={2}
+                            checked={field.value === 2}
+                            onChange={(e) => field.onChange(Number(e.target.value))}
+                            className="form-radio"
+                          />
+                          <span>Factura</span>
+                        </label>
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
+
                 )}
               />
 

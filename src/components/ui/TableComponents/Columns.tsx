@@ -246,6 +246,9 @@ const ClientActions = ({ cliente }: { cliente: Pedidos }) => {
   );
 };
 export const columns: ColumnDef<Pedidos, unknown>[] = [
+
+  { accessorKey: "num_venta", header: "N° Pedido" },
+
   {
     accessorKey: "cliente_rut",
     cell: ({ row }) => formatRut(row.original.cliente_rut),
