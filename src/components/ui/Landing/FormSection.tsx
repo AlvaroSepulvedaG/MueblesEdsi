@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { RegionesYcomunas } from "@/app/data/regiones"; // Asegúrate de ajustar la ruta según la ubicación del archivo
+import { RegionesYcomunas } from "@/app/data/regiones"; 
 import emailjs from "@emailjs/browser";
 
 const TestForm = () => {
@@ -17,8 +17,8 @@ const TestForm = () => {
     if (form.current) {
       emailjs
         .sendForm(
-          "service_bdxyzd9",
-          "template_8gbvnni",
+          "service_2qvcgtd",
+          "template_w3sbrnh",
           form.current,
           "Tf_7Z5zKz5N9PdZTt"
         )
