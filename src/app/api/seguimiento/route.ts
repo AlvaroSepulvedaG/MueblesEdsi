@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server'; 
 import pool from "../../../lib/db";
 
 export async function GET(req: Request) {
@@ -17,6 +17,7 @@ export async function GET(req: Request) {
     const query = `
       SELECT 
         v.fecha_estimada,
+        v.fecha_entrega,
         dv.estado,
         p.nombre_producto
       FROM 
@@ -39,19 +40,25 @@ export async function GET(req: Request) {
       );
     }
 
-    const { fecha_estimada, estado, nombre_producto } = rows[0];
+    const { fecha_estimada, fecha_entrega, estado, nombre_producto } = rows[0];
 
-    // Formatear fecha a "YYYY-MM-DD"
-    const fechaFormateada = new Date(fecha_estimada).toISOString().split('T')[0];
+    // Formatear fechas a "YYYY-MM-DD" si existen
+    const fechaEstimadaFormateada = fecha_estimada ? new Date(fecha_estimada).toISOString().split('T')[0] : null;
+    const fechaEntregaFormateada = fecha_entrega ? new Date(fecha_entrega).toISOString().split('T')[0] : null;
 
     // Generar mensaje amigable
     let mensaje = '';
-    if (estado !== 'Entregado') {
-      mensaje = `Su pedido ${nombre_producto} está en ${estado}. Fecha estimada de entrega: ${fechaFormateada}.`;
+    if (estado === 'Listo') {
+      mensaje = `Su pedido ${nombre_producto} está listo para su retiro.`;
+    } else if (estado === 'Entregado') {
+      mensaje = `Su pedido ${nombre_producto} fue entregado el ${fechaEntregaFormateada}.`;
+    } else {
+      mensaje = `Su pedido ${nombre_producto} está en ${estado}. Fecha estimada de entrega: ${fechaEstimadaFormateada}.`;
     }
 
     return NextResponse.json({
-      fecha_estimada: fechaFormateada,
+      fecha_estimada: fechaEstimadaFormateada,
+      fecha_entrega: fechaEntregaFormateada,
       estado,
       nombre_producto,
       mensaje,
@@ -64,4 +71,3 @@ export async function GET(req: Request) {
     );
   }
 }
-

@@ -117,19 +117,23 @@ const Tracking = () => {
                 <p className="text-gray-700">
                   <strong>Producto:</strong> {result.nombre_producto}
                 </p>
-                
                 <p className="text-gray-700">
-                  <strong>Estado:</strong> {result.estado}
+                  <strong>Estado:</strong> {
+                    result.estado === "Listo"
+                      ? "Listo para su retiro"
+                      : result.estado
+                  }
                 </p>
-
-                <p className="text-gray-700">
-                  <strong>Fecha estimada:</strong> {result.fecha_estimada}
-                </p>
-                {result.estado !== "Entregado" && (
-                  <p className="text-gray-700 mt-4">
-                    Su pedido <strong>{result.nombre_producto}</strong> está en estado <strong>{result.estado}</strong>. Fecha estimada de entrega: <strong>{result.fecha_estimada}</strong>.
+                {result.estado === "Entregado" ? (
+                  <p className="text-gray-700">
+                    <strong>Fecha de entrega:</strong> {result.fecha_entrega}
+                  </p>
+                ) : result.estado !== "Listo" && (
+                  <p className="text-gray-700">
+                    <strong>Fecha estimada:</strong> {result.fecha_estimada}
                   </p>
                 )}
+                
               </div>
             )}
           </div>
