@@ -27,16 +27,16 @@ const Navbar = () => {
         {/* Menu Desktop */}
         <ul className="hidden md:flex gap-8 text-lg">
           <li>
-            <a href="#sobreMi">Sobre mi</a>
+            <a href="/#sobreMi">Sobre mi</a>
           </li>
           <li>
-            <a href="#servicios">Servicios</a>
+            <a href="/#servicios">Servicios</a>
           </li>
           <li>
-            <a href="#galeria">Portafolio</a>
+            <a href="/#galeria">Portafolio</a>
           </li>
           <li>
-            <a href="#contacto">Contacto</a>
+            <a href="/#contacto">Contacto</a>
           </li>
           <li>
             <a href="/seguimiento">Seguimiento</a>

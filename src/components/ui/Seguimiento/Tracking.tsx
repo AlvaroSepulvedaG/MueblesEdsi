@@ -33,17 +33,15 @@ const Tracking = () => {
   };
 
   const formatearRUT = (valor) => {
-    // Elimina caracteres no válidos
     let limpio = valor.replace(/[^0-9kK]/g, '').toUpperCase();
 
-    // Aplica formato si tiene más de un carácter
     if (limpio.length > 1) {
       const cuerpo = limpio.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
       const dv = limpio.slice(-1);
       return `${cuerpo}-${dv}`;
     }
 
-    return limpio; // Devuelve el valor limpio si es corto
+    return limpio;
   };
 
   const handleRutChange = (e) => {
@@ -53,13 +51,10 @@ const Tracking = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between text-gray-900">
-      {/* Encabezado */}
       <Navbar />
 
-      {/* Contenido Principal */}
       <main
         className="flex items-center justify-center flex-grow py-10 bg-cover bg-center"
-        
       >
         <div className="absolute inset-0 bg-cover bg-center"
           style={{ 
@@ -120,18 +115,27 @@ const Tracking = () => {
             {result && (
               <div className="mt-6 p-4 bg-gray-50 rounded-lg shadow-md">
                 <p className="text-gray-700">
-                  <strong>Fecha estimada:</strong> {result.fecha_estimada}
+                  <strong>Producto:</strong> {result.nombre_producto}
                 </p>
+                
                 <p className="text-gray-700">
                   <strong>Estado:</strong> {result.estado}
                 </p>
+
+                <p className="text-gray-700">
+                  <strong>Fecha estimada:</strong> {result.fecha_estimada}
+                </p>
+                {result.estado !== "Entregado" && (
+                  <p className="text-gray-700 mt-4">
+                    Su pedido <strong>{result.nombre_producto}</strong> está en estado <strong>{result.estado}</strong>. Fecha estimada de entrega: <strong>{result.fecha_estimada}</strong>.
+                  </p>
+                )}
               </div>
             )}
           </div>
         </section>
       </main>
 
-      {/* Footer */}
       <footer className="bg-gray-200 text-center py-4">
         <p className="text-gray-700 text-sm">
           &copy; 2025 Muebles EDSI. Todos los derechos reservados.
