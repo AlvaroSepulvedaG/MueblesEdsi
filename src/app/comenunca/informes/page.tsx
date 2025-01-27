@@ -2,8 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
 import { Table, TableRow, TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 
@@ -42,48 +54,37 @@ export default function ReporteMensual() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(5);
 
+  const fetchData = async () => {
+    try {
+      const [pedidosRes, clientesRes, comprasRes] = await Promise.all([
+        fetch("/api/getPedidos"),
+        fetch("/api/getClientes"),
+        fetch("/api/getCompra"),
+      ]);
+
+      const pedidosData = await pedidosRes.json();
+      const clientesData = await clientesRes.json();
+      const comprasData = await comprasRes.json();
+
+      setPedidos(pedidosData);
+      setClientes(clientesData);
+      setCompras(comprasData);
+
+      setFilteredPedidos(pedidosData);
+      setFilteredCompras(comprasData);
+    } catch (error) {
+      console.error("Error al cargar los datos:", error);
+    }
+  };
+
   useEffect(() => {
-    fetchPedidos();
-    fetchClientes();
-    fetchCompras();
+    fetchData();
   }, []);
 
   useEffect(() => {
     filterPedidos();
     filterCompras();
-  }, [selectedMonth, selectedYear]);
-
-  const fetchPedidos = async () => {
-    try {
-      const response = await fetch("/api/getPedidos");
-      const data = await response.json();
-      setPedidos(data);
-      setFilteredPedidos(data);
-    } catch (error) {
-      console.error("Error al cargar los pedidos:", error);
-    }
-  };
-
-  const fetchClientes = async () => {
-    try {
-      const response = await fetch("/api/getClientes");
-      const data = await response.json();
-      setClientes(data);
-    } catch (error) {
-      console.error("Error al cargar los clientes:", error);
-    }
-  };
-
-  const fetchCompras = async () => {
-    try {
-      const response = await fetch("/api/getCompra");
-      const data = await response.json();
-      setCompras(data);
-      setFilteredCompras(data);
-    } catch (error) {
-      console.error("Error al cargar las compras:", error);
-    }
-  };
+  }, [selectedMonth, selectedYear, pedidos, compras]);
 
   const filterPedidos = () => {
     const filtered = pedidos.filter((pedido) => {
@@ -188,14 +189,14 @@ export default function ReporteMensual() {
     const rutLimpio = rut.replace(/\./g, "").replace(/-/g, "");
     const cuerpo = rutLimpio.slice(0, -1);
     const dv = rutLimpio.slice(-1);
-  
+
     const cuerpoFormateado = cuerpo
       .split("")
       .reverse()
       .reduce((acc, digit, i) => {
         return digit + (i > 0 && i % 3 === 0 ? "." : "") + acc;
       }, "");
-  
+
     return `${cuerpoFormateado}-${dv}`;
   };
 
@@ -276,15 +277,30 @@ export default function ReporteMensual() {
         </div>
         <div className="p-4 bg-white border rounded text-center">
           <h2 className="text-xl font-semibold">Ingresos Totales</h2>
-          <p className="text-2xl">{calcularIngresosTotales().toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</p>
+          <p className="text-2xl">
+            {calcularIngresosTotales().toLocaleString("es-CL", {
+              style: "currency",
+              currency: "CLP",
+            })}
+          </p>
         </div>
         <div className="p-4 bg-white border rounded text-center">
           <h2 className="text-xl font-semibold">Gastos Totales</h2>
-          <p className="text-2xl">{calcularGastosTotales().toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</p>
+          <p className="text-2xl">
+            {calcularGastosTotales().toLocaleString("es-CL", {
+              style: "currency",
+              currency: "CLP",
+            })}
+          </p>
         </div>
         <div className="p-4 bg-white border rounded text-center">
           <h2 className="text-xl font-semibold">Ganancia Neta</h2>
-          <p className="text-2xl">{calcularGananciasTotales().toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</p>
+          <p className="text-2xl">
+            {calcularGananciasTotales().toLocaleString("es-CL", {
+              style: "currency",
+              currency: "CLP",
+            })}
+          </p>
         </div>
       </div>
 
