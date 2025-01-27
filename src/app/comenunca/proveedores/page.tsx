@@ -25,11 +25,16 @@ async function getData(): Promise<Proveedores[]> {
     console.log("Datos mapeados:", proveedores);
 
     return proveedores;
-  } catch (error) {
-    console.error("Error al obtener datos de proveedores:", error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      // Ahora TypeScript sabe que 'error' es una instancia de Error
+      console.error("Error al obtener datos de proveedores:", error.message);
+    } else {
+      // Si el error no es una instancia de Error, solo imprimes el error completo
+      console.error("Error desconocido:", error);
+    }
     return [];
   }
-}
 
 export default async function ProveedoresPage() {
   const data = await getData();
