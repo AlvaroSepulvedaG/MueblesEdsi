@@ -261,7 +261,7 @@ export function OrderForm({
               append({
                 nombreProducto: "",
                 codigoProducto: "",
-                precio: undefined,
+                precio: 0,
                 id_producto: 0,
               })
             }
