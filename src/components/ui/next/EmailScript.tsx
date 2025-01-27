@@ -25,6 +25,7 @@ const EmailScript = () => {
     };
   }, []);
 
+  return null;
 };
 
 export default EmailScript;
