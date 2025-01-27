@@ -6,8 +6,19 @@ async function getData(): Promise<Clientes[]> {
   try {
     const client = await pool.connect();
     const res = await client.query(
-      "SELECT * FROM public.venta vnt INNER JOIN public.detalle_venta dt on vnt.num_venta=dt.venta_num_venta INNER JOIN public.cliente cli on vnt.cliente_rut=cli.rut INNER JOIN public.producto prod on dt.producto_id_producto=prod.id_producto ORDER BY id_detalle_venta DESC"
-    );
+      `SELECT DISTINCT ON (cli.rut) 
+       cli.rut, 
+       cli.telefono_movil, 
+       cli.nombres, 
+       cli.correo, 
+       cli.apellido_paterno, 
+       cli.apellido_materno, 
+       cli.direccion 
+      FROM public.venta vnt
+      INNER JOIN public.detalle_venta dt ON vnt.num_venta = dt.venta_num_venta
+       INNER JOIN public.cliente cli ON vnt.cliente_rut = cli.rut
+       INNER JOIN public.producto prod ON dt.producto_id_producto = prod.id_producto
+       ORDER BY cli.rut, id_detalle_venta DESC`    );
     client.release();
 
     // Mapear los resultados para que coincidan con el tipo Clientes
