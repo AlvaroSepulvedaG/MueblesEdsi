@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { RegionesYcomunas } from "@/app/data/regiones"; 
 import emailjs from "@emailjs/browser";
 
@@ -12,15 +12,24 @@ const TestForm = () => {
   const [comunasFiltradas, setComunasFiltradas] = useState<string[]>([]);
   const [alertVisible, setAlertVisible] = useState(false);
 
+  // Inicializa EmailJS al cargar el componente
+  useEffect(() => {
+    if (emailjs) {
+      emailjs.init("JM98MA0bQWgBqbNoT"); // Reemplaza con tu clave pública
+    }
+  }, []);
+
   const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
     if (form.current) {
+      console.log("Enviando formulario con emailjs:", emailjs); // Verifica que emailjs esté disponible
+
+      // Enviar el formulario con emailjs
       emailjs
         .sendForm(
-          "service_2qvcgtd",
-          "template_w3sbrnh",
-          form.current,
-          "Tf_7Z5zKz5N9PdZTt"
+          "service_2qvcgtd", // ID del servicio
+          "template_w3sbrnh", // ID de tu plantilla
+          form.current, // El formulario a enviar
         )
         .then(
           () => {
@@ -29,8 +38,8 @@ const TestForm = () => {
             form.current?.reset();
           },
           (error) => {
-            alert("Error al enviar el mensaje. Por favor, inténtalo de nuevo."); // Alerta de error
-            console.log("FAILED...", error.text);
+            alert("Error al enviar el mensaje. Por favor, inténtalo de nuevo.");
+            console.log("FAILED...", error.text); // Información de error detallada
           }
         );
     }
@@ -61,14 +70,14 @@ const TestForm = () => {
           <input
             type="text"
             placeholder="Nombre"
-            name="user_name"
+            name="user_name" // Corresponde al 'name' en el formulario de EmailJS
             required
             className="p-3 bg-transparent rounded-3xl outline-none border-2"
           />
           <input
             type="text"
             placeholder="Apellido"
-            name="user_lastname"
+            name="user_lastname" // No es obligatorio, pero si lo deseas
             required
             className="p-3 bg-transparent rounded-3xl outline-none border-2"
           />
@@ -76,14 +85,14 @@ const TestForm = () => {
         <div className="grid grid-cols-2 gap-4">
           <input
             type="email"
-            name="user_email"
+            name="user_email" // Corresponde al 'name' en el formulario de EmailJS
             required
             placeholder="Correo"
             className="p-3 bg-transparent rounded-3xl outline-none border-2"
           />
           <input
             type="tel"
-            name="user_phone"
+            name="user_phone" // Corresponde al 'name' en el formulario de EmailJS
             required
             placeholder="Teléfono"
             className="p-3 bg-transparent rounded-3xl outline-none border-2"
@@ -93,7 +102,7 @@ const TestForm = () => {
           <select
             className="p-3 bg-transparent rounded-3xl outline-none border-2"
             required
-            name="user_region"
+            name="user_region" // Corresponde al 'name' en el formulario de EmailJS
             value={regionSeleccionada}
             onChange={handleRegionChange}
           >
@@ -113,7 +122,7 @@ const TestForm = () => {
           <select
             className="p-3 bg-transparent rounded-3xl outline-none border-2"
             required
-            name="user_comuna"
+            name="user_comuna" // Corresponde al 'name' en el formulario de EmailJS
           >
             <option value="" className="text-black">
               Selecciona una comuna
@@ -126,7 +135,7 @@ const TestForm = () => {
           </select>
         </div>
         <textarea
-          name="message"
+          name="message" // Corresponde al 'name' en el formulario de EmailJS
           required
           placeholder="Escribe tu mensaje..."
           className="p-3 bg-transparent rounded-3xl w-full h-32 outline-none border-2"
