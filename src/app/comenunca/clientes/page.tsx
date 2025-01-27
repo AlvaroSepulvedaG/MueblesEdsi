@@ -6,7 +6,7 @@ async function getData(): Promise<Clientes[]> {
   try {
     const client = await pool.connect();
     const res = await client.query(
-      "SELECT * FROM public.cliente ORDER BY RUT DESC"
+      "SELECT * FROM public.venta vnt INNER JOIN public.detalle_venta dt on vnt.num_venta=dt.venta_num_venta INNER JOIN public.cliente cli on vnt.cliente_rut=cli.rut INNER JOIN public.producto prod on dt.producto_id_producto=prod.id_producto ORDER BY id_detalle_venta DESC"
     );
     client.release();
 

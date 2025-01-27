@@ -217,10 +217,18 @@ function formatDateToDDMMYYYY(date: Date): string {
 
 // Definición de columnas
 export const columns: ColumnDef<Compra>[] = [
+
   {
-    accessorFn: (row) => row.num_compra,
-    id: "num_compra",
-    header: "N° Compra",
+    accessorKey: "num_compra",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        N° Compra
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
   },
   {
     accessorKey: "proveedor_rut_proveedor",
@@ -230,7 +238,7 @@ export const columns: ColumnDef<Compra>[] = [
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        RUT
+        RUT Proveedor
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
@@ -238,12 +246,24 @@ export const columns: ColumnDef<Compra>[] = [
   {
     accessorFn: (row) =>
       `${row.nombre_proveedor}`,
-    id: "Nombre Proveedor",
+    id: "Nombre",
   },
- 
-  { accessorKey: "monto_compra", header: "Monto" },
 
-  { accessorKey: "correo_proveedor", header: "Correo" },
+  { accessorKey: "descripcion_compra", header: "Detalle" },
+
+  {
+    accessorKey: "monto_compra",
+    header: "Monto",
+    cell: ({ row }) => {
+      const value = row.original.monto_compra;
+      return new Intl.NumberFormat("es-CL", {
+        style: "currency",
+        currency: "CLP",
+      }).format(value);
+    },
+  },
+
+
 
   {
     accessorKey: "fecha_compra", 
@@ -254,7 +274,7 @@ export const columns: ColumnDef<Compra>[] = [
     },
   },
 
-  { accessorKey: "nombre_tipo_documento", header: "Tipo Documento" },
+  { accessorKey: "nombre_tipo_documento", header: "Documento" },
 
 
   

@@ -51,7 +51,7 @@ const DataTable = <TData, TValue>({
     state: { sorting, globalFilter },
     globalFilterFn: (row, columnId, filterValue) => {
       const nombre =
-        row.getValue("Nombre Proveedor")?.toString().toLowerCase() ?? "";
+        row.getValue("proveedor.nombre_proveedor")?.toString().toLowerCase() ?? "";
       const rut = row.getValue("proveedor_rut_proveedor")?.toString().toLowerCase() ?? "";
       const filter = filterValue.toLowerCase();
       return nombre.includes(filter) || rut.includes(filter);

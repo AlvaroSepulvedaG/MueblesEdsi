@@ -92,6 +92,13 @@ const Sidebar: React.FC = () => {
           icon={<FaHome size={40} />}
           text={isOpen ? "Inicio" : ""}
         />
+
+        <NavItem
+          href="/comenunca/clientes"
+          icon={<FaUsers size={40} />}
+          text={isOpen ? "Clientes" : ""}
+        />
+
         <NavItem
           href="/comenunca/orders"
           icon={<FaChartLine size={40} />}
@@ -100,18 +107,14 @@ const Sidebar: React.FC = () => {
         <NavItem
           href="/comenunca/proveedores"
           icon={<FaParachuteBox size={40} />}
-          text={isOpen ? "Proveedor" : ""}
+          text={isOpen ? "Proveedores" : ""}
         />
         <NavItem
           href="/comenunca/compras"
           icon={<FaCoins size={40} />}
           text={isOpen ? "Compras" : ""}
         />
-        <NavItem
-          href="/comenunca/clientes"
-          icon={<FaUsers size={40} />}
-          text={isOpen ? "Clientes" : ""}
-        />
+
         <NavItem
           href="/comenunca/informes"
           icon={<FaFileAlt size={40} />}

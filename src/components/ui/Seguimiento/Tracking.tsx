@@ -113,28 +113,30 @@ const Tracking = () => {
               {error && (
                 <p className="text-red-500 text-center mt-4">{error}</p>
               )}
-              {result && (
+              {result && result.productos && (
                 <div className="mt-6 p-4 bg-gray-50 rounded-lg shadow-md">
-                  <p className="text-gray-700">
-                    <strong>Producto:</strong> {result.nombre_producto}
-                  </p>
-                  <p className="text-gray-700">
-                    <strong>Estado:</strong> {
-                      result.estado === "Listo"
-                        ? "Listo para su retiro"
-                        : result.estado
-                    }
-                  </p>
-                  {result.estado === "Entregado" ? (
-                    <p className="text-gray-700">
-                      <strong>Fecha de entrega:</strong> {result.fecha_entrega}
-                    </p>
-                  ) : result.estado !== "Listo" && (
-                    <p className="text-gray-700">
-                      <strong>Fecha estimada:</strong> {result.fecha_estimada}
-                    </p>
-                  )}
-                  
+                  {result.productos.map((producto, index) => (
+                    <div key={index} className="mb-4">
+                      <p className="text-gray-700">
+                        <strong>Producto: </strong> {producto.nombre_producto}
+                      </p>
+                      <p className="text-gray-700">
+                        <strong>Estado: </strong> 
+                        {producto.estado === "Listo"
+                          ? "Listo para su retiro"
+                          : producto.estado}
+                      </p>
+                      {producto.estado === "Entregado" ? (
+                        <p className="text-gray-700">
+                          <strong>Fecha de entrega: </strong> {producto.fecha_entrega}
+                        </p>
+                      ) : producto.estado !== "Listo" && (
+                        <p className="text-gray-700">
+                          <strong>Fecha estimada :</strong> {producto.fecha_estimada}
+                        </p>
+                      )}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

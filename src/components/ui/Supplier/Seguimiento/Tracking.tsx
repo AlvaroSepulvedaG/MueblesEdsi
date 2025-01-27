@@ -142,10 +142,10 @@ const Tracking = () => {
             {result && (
               <div className="mt-6 p-4 bg-gray-50 rounded-lg shadow-md">
                 <p className="text-gray-700">
-                  <strong>Fecha estimada:</strong> {result.fecha_estimada}
+                  <strong>Fecha estimada: </strong> {result.fecha_estimada}
                 </p>
                 <p className="text-gray-700">
-                  <strong>Estado:</strong> {result.estado}
+                  <strong>Estado: </strong> {result.estado}
                 </p>
               </div>
             )}

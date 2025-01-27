@@ -47,7 +47,7 @@ export type Pedido = {
   apellido_materno?: string;
   cliente_rut: string;
   direccion?: string;
-  precio?: number;
+  precio: number;
   abono?: number;
   nombre_producto: string;
   cod_producto: string;
@@ -86,8 +86,7 @@ const ClientActions = ({ cliente }: { cliente: Pedido }) => {
   const [successMessage, setSuccessMessage] = React.useState<string | null>(
     null
   );
-  // Verifica el contenido de cliente
-  console.log("Cliente:", cliente);
+
   React.useEffect(() => {
     const storedMessage = localStorage.getItem("successMessage");
     if (storedMessage) {
@@ -253,7 +252,21 @@ export const columns: ColumnDef<Pedido>[] = [
       return telefono ? telefono.toString() : "Sin teléfono";
     },
   },
-  { accessorKey: "direccion", header: "Dirección" },
+  { accessorKey: "nombre_producto", header: "Producto" },
+
+  {
+    accessorKey: "precio",
+    header: "Precio",
+    cell: ({ row }) => {
+      const value = row.original.precio;
+      return new Intl.NumberFormat("es-CL", {
+        style: "currency",
+        currency: "CLP",
+      }).format(value);
+    },
+  },
+
+
   { accessorKey: "estado", header: "Estado" },
 
   {

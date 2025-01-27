@@ -33,6 +33,9 @@ export async function GET(req: Request) {
 
     const { rows } = await pool.query(query, values);
 
+    // Verifica si los datos llegaron correctamente
+    console.log(rows);
+
     if (rows.length === 0) {
       return NextResponse.json(
         { error: 'No se encontró información para este RUT y pedido' },
@@ -40,29 +43,34 @@ export async function GET(req: Request) {
       );
     }
 
-    const { fecha_estimada, fecha_entrega, estado, nombre_producto } = rows[0];
+    // Mapear los resultados para cada producto
+    const productos = rows.map(row => {
+      const fechaEstimadaFormateada = row.fecha_estimada
+        ? new Date(row.fecha_estimada).toISOString().split('T')[0]
+        : null;
+      const fechaEntregaFormateada = row.fecha_entrega
+        ? new Date(row.fecha_entrega).toISOString().split('T')[0]
+        : null;
 
-    // Formatear fechas a "YYYY-MM-DD" si existen
-    const fechaEstimadaFormateada = fecha_estimada ? new Date(fecha_estimada).toISOString().split('T')[0] : null;
-    const fechaEntregaFormateada = fecha_entrega ? new Date(fecha_entrega).toISOString().split('T')[0] : null;
+      let mensaje = '';
+      if (row.estado === 'Listo') {
+        mensaje = `El producto ${row.nombre_producto} está listo para su retiro.`;
+      } else if (row.estado === 'Entregado') {
+        mensaje = `El producto ${row.nombre_producto} fue entregado el ${fechaEntregaFormateada}.`;
+      } else {
+        mensaje = `El producto ${row.nombre_producto} está en ${row.estado}. Fecha estimada de entrega: ${fechaEstimadaFormateada}.`;
+      }
 
-    // Generar mensaje amigable
-    let mensaje = '';
-    if (estado === 'Listo') {
-      mensaje = `Su pedido ${nombre_producto} está listo para su retiro.`;
-    } else if (estado === 'Entregado') {
-      mensaje = `Su pedido ${nombre_producto} fue entregado el ${fechaEntregaFormateada}.`;
-    } else {
-      mensaje = `Su pedido ${nombre_producto} está en ${estado}. Fecha estimada de entrega: ${fechaEstimadaFormateada}.`;
-    }
-
-    return NextResponse.json({
-      fecha_estimada: fechaEstimadaFormateada,
-      fecha_entrega: fechaEntregaFormateada,
-      estado,
-      nombre_producto,
-      mensaje,
+      return {
+        nombre_producto: row.nombre_producto,
+        estado: row.estado,
+        fecha_estimada: fechaEstimadaFormateada,
+        fecha_entrega: fechaEntregaFormateada,
+        mensaje,
+      };
     });
+
+    return NextResponse.json({ productos });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
