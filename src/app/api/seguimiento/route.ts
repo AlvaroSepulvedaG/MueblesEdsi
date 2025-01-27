@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server'; 
 import pool from "../../../lib/db";
 
+// Define la interfaz para las filas de la consulta
+interface ProductoRow {
+  fecha_estimada: string | null;
+  fecha_entrega: string | null;
+  estado: string;
+  nombre_producto: string;
+}
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const rut = searchParams.get('rut');
@@ -44,7 +52,7 @@ export async function GET(req: Request) {
     }
 
     // Mapear los resultados para cada producto
-    const productos = rows.map(row => {
+    const productos = rows.map((row: ProductoRow) => {
       const fechaEstimadaFormateada = row.fecha_estimada
         ? new Date(row.fecha_estimada).toISOString().split('T')[0]
         : null;
