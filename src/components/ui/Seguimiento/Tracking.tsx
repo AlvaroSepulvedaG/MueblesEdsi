@@ -5,10 +5,22 @@ import Link from "next/link";
 import Image from "next/image";
 import Navbar from "../Landing/Navbar";
 
+// Definir los tipos para los productos y la respuesta
+interface Producto {
+  nombre_producto: string;
+  estado: string;
+  fecha_estimada: string | null;
+  fecha_entrega: string | null;
+}
+
+interface Result {
+  productos: Producto[];
+}
+
 const Tracking = () => {
   const [rut, setRut] = useState("");
   const [pedido, setPedido] = useState("");
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<Result | null>(null); // Definir el tipo de 'result'
   const [error, setError] = useState("");
 
   const handleConsultar = async () => {
@@ -25,14 +37,18 @@ const Tracking = () => {
         throw new Error(errorData.error || "Error desconocido");
       }
 
-      const data = await response.json();
+      const data: Result = await response.json(); // Asegurarse de que el tipo sea 'Result'
       setResult(data);
-    } catch (err) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Error desconocido");
+      }
     }
   };
 
-  const formatearRUT = (valor) => {
+  const formatearRUT = (valor: string) => {
     let limpio = valor.replace(/[^0-9kK]/g, '').toUpperCase();
 
     if (limpio.length > 1) {
@@ -44,7 +60,7 @@ const Tracking = () => {
     return limpio;
   };
 
-  const handleRutChange = (e) => {
+  const handleRutChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     setRut(formatearRUT(input));
   };
@@ -53,9 +69,7 @@ const Tracking = () => {
     <div className="min-h-screen flex flex-col justify-between text-gray-900">
       <Navbar />
 
-      <main
-        className="flex items-center justify-center flex-grow py-10 bg-cover bg-center"
-      >
+      <main className="flex items-center justify-center flex-grow py-10 bg-cover bg-center">
         <div className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: "url('/hero.png')", 
