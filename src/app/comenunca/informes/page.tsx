@@ -77,16 +77,14 @@ export default function ReporteMensual() {
     }
   };
 
-  // useEffect para cargar los datos cuando el componente se monta o los filtros cambian
   useEffect(() => {
     fetchData();
-  }, [selectedMonth, selectedYear]); // Llamar a fetchData cuando los filtros cambian
-
-  // useEffect para aplicar los filtros a los pedidos y compras cuando los datos cambian o los filtros cambian
+  }, [selectedMonth, selectedYear]); 
+ 
   useEffect(() => {
     filterPedidos();
     filterCompras();
-  }, [pedidos, compras, selectedMonth, selectedYear]); // Este useEffect se activa cuando los filtros o los datos cambian
+  }, [pedidos, compras, selectedMonth, selectedYear]);
 
   const filterPedidos = () => {
     const filtered = pedidos.filter((pedido) => {
