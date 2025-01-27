@@ -1,52 +1,56 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
 import { Table, TableRow, TableCell } from "@/components/ui/table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import BarChartCust from "@/components/ui/Charts/Chart";
+
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 interface Pedido {
   id: number;
   nombre_producto: string;
   precio_producto: number;
   fecha_venta: string;
-  cliente_rut: string;
 }
 
 interface Cliente {
   id: number;
   nombre: string;
-  fecha_registro: string;
+  rut: string;
+}
+
+interface Compra {
+  num_compra: number;
+  descripcion_compra: string;
+  monto_compra: number;
+  fecha_compra: string;
 }
 
 export default function ReporteMensual() {
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
+  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [compras, setCompras] = useState<Compra[]>([]);
   const [filteredPedidos, setFilteredPedidos] = useState<Pedido[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage] = useState<number>(5);
+  const [filteredCompras, setFilteredCompras] = useState<Compra[]>([]);
   const [selectedMonth, setSelectedMonth] = useState<string>("all");
   const [selectedYear, setSelectedYear] = useState<string>(
     new Date().getFullYear().toString()
   );
-  const [clientes, setClientes] = useState<Cliente[]>([]);
-  const [filteredClientes, setFilteredClientes] = useState<Cliente[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage] = useState<number>(5);
 
   useEffect(() => {
     fetchPedidos();
+    fetchClientes();
+    fetchCompras();
   }, []);
 
   useEffect(() => {
     filterPedidos();
-  }, [selectedMonth, selectedYear]);
-
-  useEffect(() => {
-    filterClientes();
+    filterCompras();
   }, [selectedMonth, selectedYear]);
 
   const fetchPedidos = async () => {
@@ -57,6 +61,27 @@ export default function ReporteMensual() {
       setFilteredPedidos(data);
     } catch (error) {
       console.error("Error al cargar los pedidos:", error);
+    }
+  };
+
+  const fetchClientes = async () => {
+    try {
+      const response = await fetch("/api/getClientes");
+      const data = await response.json();
+      setClientes(data);
+    } catch (error) {
+      console.error("Error al cargar los clientes:", error);
+    }
+  };
+
+  const fetchCompras = async () => {
+    try {
+      const response = await fetch("/api/getCompra");
+      const data = await response.json();
+      setCompras(data);
+      setFilteredCompras(data);
+    } catch (error) {
+      console.error("Error al cargar las compras:", error);
     }
   };
 
@@ -73,57 +98,82 @@ export default function ReporteMensual() {
     setCurrentPage(1);
   };
 
-  const fetchClientes = async () => {
-    try {
-      const response = await fetch("/api/getClientes");
-      const data = await response.json();
-      console.log("Clientes recibidos:", data); // Verifica la estructura de datos
-      setClientes(Array.isArray(data) ? data : []); // Asegúrate de que sea un arreglo
-      setFilteredClientes(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error("Error al cargar los clientes:", error);
-    }
-  };
-  const filterClientes = () => {
-    const filtered = clientes.filter((cliente) => {
-      if (!cliente.fecha_registro) return false; // Excluir registros inválidos
-      const [year, month] = cliente.fecha_registro.split("-");
+  const filterCompras = () => {
+    const filtered = compras.filter((compra) => {
+      if (!compra.fecha_compra) return false;
+      const [year, month] = compra.fecha_compra.split("-");
       return (
         selectedYear === year &&
         (selectedMonth === "all" || month === selectedMonth)
       );
     });
-    setFilteredClientes(filtered);
-    setCurrentPage(1);
+    setFilteredCompras(filtered);
   };
 
-  useEffect(() => {
-    fetchPedidos();
-    fetchClientes();
-  }, []);
+  const calcularIngresosTotales = () =>
+    filteredPedidos.reduce((total, pedido) => total + pedido.precio_producto, 0);
 
-  const calcularDatosGrafico = () => {
-    const ventasPorMes: { [key: string]: number } = {};
+  const calcularGastosTotales = () =>
+    filteredCompras.reduce((total, compra) => total + compra.monto_compra, 0);
+
+  const calcularGananciasTotales = () =>
+    calcularIngresosTotales() - calcularGastosTotales();
+
+  const calcularNumeroVentas = () => filteredPedidos.length;
+
+  const obtenerClientePorId = (id: number): Cliente | undefined => {
+    return clientes.find((cliente) => cliente.id === id);
+  };
+
+  const obtenerDatosGrafico = () => {
+    const meses = [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ];
+
+    const ingresosMensuales = new Array(12).fill(0);
+    const gastosMensuales = new Array(12).fill(0);
 
     filteredPedidos.forEach((pedido) => {
-      const [year, month] = pedido.fecha_venta.split("-");
-      const clave = `${year}-${month}`;
-
-      ventasPorMes[clave] = (ventasPorMes[clave] || 0) + pedido.precio_producto;
+      const month = parseInt(pedido.fecha_venta.split("-")[1], 10) - 1;
+      ingresosMensuales[month] += pedido.precio_producto;
     });
 
-    return Object.keys(ventasPorMes).map((fecha) => ({
-      fecha,
-      total: ventasPorMes[fecha],
-    }));
-  };
+    filteredCompras.forEach((compra) => {
+      const month = parseInt(compra.fecha_compra.split("-")[1], 10) - 1;
+      gastosMensuales[month] += compra.monto_compra;
+    });
 
-  const calcularTotalVentas = () => filteredPedidos.length;
-  const calcularIngresosTotales = () =>
-    filteredPedidos.reduce(
-      (total, pedido) => total + pedido.precio_producto,
-      0
-    );
+    return {
+      labels: meses,
+      datasets: [
+        {
+          label: "Ingresos",
+          data: ingresosMensuales,
+          backgroundColor: "rgba(37, 99, 235, 0.5)",
+          borderColor: "rgba(37, 99, 235, 1)",
+          borderWidth: 1,
+        },
+        {
+          label: "Gastos",
+          data: gastosMensuales,
+          backgroundColor: "rgba(220, 38, 38, 0.5)",
+          borderColor: "rgba(220, 38, 38, 1)",
+          borderWidth: 1,
+        },
+      ],
+    };
+  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -133,6 +183,21 @@ export default function ReporteMensual() {
   );
 
   const totalPages = Math.ceil(filteredPedidos.length / itemsPerPage);
+
+  const formatearRUT = (rut: string): string => {
+    const rutLimpio = rut.replace(/\./g, "").replace(/-/g, "");
+    const cuerpo = rutLimpio.slice(0, -1);
+    const dv = rutLimpio.slice(-1);
+  
+    const cuerpoFormateado = cuerpo
+      .split("")
+      .reverse()
+      .reduce((acc, digit, i) => {
+        return digit + (i > 0 && i % 3 === 0 ? "." : "") + acc;
+      }, "");
+  
+    return `${cuerpoFormateado}-${dv}`;
+  };
 
   const formatearMonto = (monto: number): string => {
     if (isNaN(monto)) return "Monto no disponible";
@@ -150,50 +215,6 @@ export default function ReporteMensual() {
     const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
     const año = fecha.getFullYear();
     return `${dia}/${mes}/${año}`;
-  };
-
-  const formatearRUT = (rut: string): string => {
-    if (!rut) {
-      return "RUT inválido"; // Mensaje por defecto si el RUT no es válido
-    }
-
-    const rutLimpio = rut.replace(/\./g, "").replace(/-/g, "");
-    const cuerpo = rutLimpio.slice(0, -1);
-    const dv = rutLimpio.slice(-1);
-
-    const cuerpoFormateado = cuerpo
-      .split("")
-      .reverse()
-      .reduce((acc, digit, i) => {
-        return digit + (i > 0 && i % 3 === 0 ? "." : "") + acc;
-      }, "");
-
-    return `${cuerpoFormateado}-${dv}`;
-  };
-  const obtenerNombreMes = (mes: string) => {
-    const meses: { [key: string]: string } = {
-      "01": "Enero",
-      "02": "Febrero",
-      "03": "Marzo",
-      "04": "Abril",
-      "05": "Mayo",
-      "06": "Junio",
-      "07": "Julio",
-      "08": "Agosto",
-      "09": "Septiembre",
-      "10": "Octubre",
-      "11": "Noviembre",
-      "12": "Diciembre",
-    };
-    return meses[mes] || "Mes desconocido";
-  };
-
-  useEffect(() => {
-    console.log("Clientes filtrados:", filteredClientes); // Verifica el contenido de filteredClientes
-  }, [filteredClientes]);
-
-  const calcularClientesNuevos = () => {
-    return filteredClientes.length; // Devuelve la cantidad de clientes filtrados
   };
 
   return (
@@ -225,7 +246,10 @@ export default function ReporteMensual() {
             <span>
               {selectedMonth === "all"
                 ? "Todos los meses"
-                : obtenerNombreMes(selectedMonth)}
+                : new Date(0, parseInt(selectedMonth) - 1).toLocaleString(
+                    "es-CL",
+                    { month: "long" }
+                  )}
             </span>
           </SelectTrigger>
           <SelectContent>
@@ -236,7 +260,7 @@ export default function ReporteMensual() {
               const monthValue = (index + 1).toString().padStart(2, "0");
               return (
                 <SelectItem key={monthValue} value={monthValue}>
-                  {obtenerNombreMes(monthValue)}
+                  {new Date(0, index).toLocaleString("es-CL", { month: "long" })}
                 </SelectItem>
               );
             })}
@@ -245,52 +269,29 @@ export default function ReporteMensual() {
       </div>
 
       {/* Resumen */}
-      <div className="flex space-x-10">
-        <div className="p-4 rounded-sm text-center bg-white border-gray-400 border">
-          <h2 className="text-xl font-semibold">Total de Ventas</h2>
-          <p className="text-2xl">{calcularTotalVentas()}</p>
+      <div className="flex space-x-10 mb-6">
+        <div className="p-4 bg-white border rounded text-center">
+          <h2 className="text-xl font-semibold">Número de Ventas</h2>
+          <p className="text-2xl">{calcularNumeroVentas()}</p>
         </div>
-        <div className="p-4 rounded-sm text-center bg-white border-gray-400 border">
+        <div className="p-4 bg-white border rounded text-center">
           <h2 className="text-xl font-semibold">Ingresos Totales</h2>
-          <p className="text-2xl">
-            {formatearMonto(calcularIngresosTotales())}
-          </p>
+          <p className="text-2xl">{calcularIngresosTotales().toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</p>
         </div>
-        <div className="p-4 rounded-sm text-center bg-white border-gray-400 border">
-          <h2 className="text-xl font-semibold">Clientes Nuevos</h2>
-          <p className="text-2xl">{calcularClientesNuevos()}</p>
+        <div className="p-4 bg-white border rounded text-center">
+          <h2 className="text-xl font-semibold">Gastos Totales</h2>
+          <p className="text-2xl">{calcularGastosTotales().toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</p>
+        </div>
+        <div className="p-4 bg-white border rounded text-center">
+          <h2 className="text-xl font-semibold">Ganancia Neta</h2>
+          <p className="text-2xl">{calcularGananciasTotales().toLocaleString("es-CL", { style: "currency", currency: "CLP" })}</p>
         </div>
       </div>
 
-      <div className="mb-6 w-full max-w-6xl">
-        <h2 className="flex text-xl font-bold mb-4 justify-center my-5">
-          Gráfico de Ventas
-        </h2>
-        {/* div que contiene los graficos*/}
-        <div className="flex justify-between mb-6 space-x-6 font-semibold">
-          <div className=" w-[50%] mr-5">
-            <BarChartCust
-              data={filteredPedidos.map((pedido) => ({
-                fecha: pedido.fecha_venta,
-              }))}
-              title="Ventas por Mes"
-              config={{ label: "Ventas nuevas", color: "#2563eb" }}
-              selectedYear={selectedYear}
-              selectedMonth={selectedMonth}
-            />
-          </div>
-          <div className="w-[50%] ml-5">
-            <BarChartCust
-              data={filteredClientes.map((cliente) => ({
-                fecha: cliente.fecha_registro,
-              }))}
-              title="Clientes Nuevos por Mes"
-              config={{ label: "Clientes nuevos", color: "#22c55e" }}
-              selectedYear={selectedYear}
-              selectedMonth={selectedMonth}
-            />
-          </div>
-        </div>
+      {/* Gráficos */}
+      <div className="w-full max-w-4xl">
+        <h2 className="text-xl font-bold mb-4">Ingresos vs Gastos por Mes</h2>
+        <Bar data={obtenerDatosGrafico()} />
       </div>
 
       {/* Tabla con paginación */}
@@ -309,16 +310,19 @@ export default function ReporteMensual() {
           </thead>
           <tbody>
             {currentPedidos.length ? (
-              currentPedidos.map((pedido) => (
-                <TableRow key={pedido.id}>
-                  <TableCell>{pedido.nombre_producto}</TableCell>
-                  <TableCell>
-                    {formatearMonto(pedido.precio_producto)}
-                  </TableCell>
-                  <TableCell>{formatearFecha(pedido.fecha_venta)}</TableCell>
-                  <TableCell>{formatearRUT(pedido.cliente_rut)}</TableCell>
-                </TableRow>
-              ))
+              currentPedidos.map((pedido) => {
+                const cliente = obtenerClientePorId(pedido.id);
+                return (
+                  <TableRow key={pedido.id}>
+                    <TableCell>{pedido.nombre_producto}</TableCell>
+                    <TableCell>
+                      {formatearMonto(pedido.precio_producto)}
+                    </TableCell>
+                    <TableCell>{formatearFecha(pedido.fecha_venta)}</TableCell>
+                    <TableCell>{cliente ? `${formatearRUT(cliente.rut)}` : "No registrado"}</TableCell>
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell colSpan={4} className="text-center">

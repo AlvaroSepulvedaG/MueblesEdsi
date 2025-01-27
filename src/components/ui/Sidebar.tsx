@@ -105,7 +105,7 @@ const Sidebar: React.FC = () => {
         <NavItem
           href="/comenunca/compras"
           icon={<FaCoins size={40} />}
-          text={isOpen ? "Ventas" : ""}
+          text={isOpen ? "Compras" : ""}
         />
         <NavItem
           href="/comenunca/clientes"
