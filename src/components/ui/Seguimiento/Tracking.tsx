@@ -64,7 +64,7 @@ const Tracking = () => {
           }}
         ></div>
 
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 flex items-center justify-center">
           <section className="w-full max-w-4xl bg-white rounded-lg shadow-2xl overflow-hidden flex flex-col lg:flex-row">
             <div className="lg:w-1/3 w-full flex items-center justify-center bg-[#393839] bg-[url('/diseño-horizontal.svg')] text-white p-6">
               <h2 className="text-2xl font-bold text-center">
