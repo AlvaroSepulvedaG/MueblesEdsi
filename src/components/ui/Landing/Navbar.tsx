@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"; // Iconos de menú
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,15 +15,15 @@ const Navbar = () => {
   return (
     <div className="bg-transparent absolute w-full text-gray-200">
       <nav className="z-40 relative md:px-16 px-8 py-4 flex justify-between items-center bg-transparent">
-        <a className="text-3xl font-bold leading-none" href="#">
+        <Link href="/" className="text-3xl font-bold leading-none">
           <Image
             src="/logo-blanco.png"
             alt="Muebleria EDSI"
             className="h-16 w-auto"
-            width="400"
-            height="300"
+            width={400}
+            height={300}
           />
-        </a>
+        </Link>
 
         {/* Menu Desktop */}
         <ul className="hidden md:flex gap-8 text-lg">
@@ -61,15 +62,15 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out z-50`}
       >
-        <a className="text-3xl font-bold leading-none" href="#">
+        <Link href="/" className="text-3xl font-bold leading-none">
           <Image
             src="/logo-blanco.png"
             alt="Muebleria EDSI"
             className="h-16 w-auto m-8"
-            width="400"
-            height="300"
+            width={400}
+            height={300}
           />
-        </a>
+        </Link>
         <ul className="flex flex-col items-start p-6 space-y-6 text-lg">
           <li>
             <a href="#servicios" onClick={toggleMenu}>
@@ -89,6 +90,11 @@ const Navbar = () => {
           <li>
             <a href="#contacto" onClick={toggleMenu}>
               Contacto
+            </a>
+          </li>
+          <li>
+            <a href="/seguimiento" onClick={toggleMenu}>
+              Seguimiento
             </a>
           </li>
         </ul>
