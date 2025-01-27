@@ -44,7 +44,7 @@ export function SupplierForm({
     defaultValues: {
       rut_proveedor: rut_proveedor || "",
       nombre_proveedor: nombre_proveedor || "",
-      telefono_proveedor: telefono_proveedor ?? null,
+      telefono_proveedor: telefono_proveedor || undefined,
       correo_proveedor: correo_proveedor || "",
     },
   });
