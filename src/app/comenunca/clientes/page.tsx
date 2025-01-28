@@ -31,7 +31,6 @@ ORDER BY cli.rut, dt.id_detalle_venta DESC;
       apellido_paterno: row.apellido_paterno,
       apellido_materno: row.apellido_materno,
       dirección: row.dirección,
-      correo: row.correo,
     }));
   } catch (error) {
     console.error("Error al obtener datos de clientes:", error);
