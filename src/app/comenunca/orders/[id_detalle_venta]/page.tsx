@@ -69,6 +69,7 @@ export default async function VentaDetalles({
         <OrderForm
           num_venta={data.num_venta}
           id_detalle_venta={data.id_detalle_venta}
+          correo = {data.correo}
           abono={data.abono}
           productos={
             data.precio

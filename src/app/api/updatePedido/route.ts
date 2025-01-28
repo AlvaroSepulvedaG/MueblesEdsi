@@ -12,7 +12,6 @@ interface UpdateData {
     precio?: number;
   }>;
 }
-
 export async function PUT(req: Request) {
   const client = await pool.connect();
   try {
@@ -41,10 +40,39 @@ export async function PUT(req: Request) {
 
     // Actualizar o insertar detalles de venta
     for (const item of items) {
-      const { producto_id_producto, precio } = item;
+      const { producto_id_producto, precio, nombre_producto } = item;
 
       if (producto_id_producto) {
-        // Actualizar si ya existe
+        // Si se proporciona un nuevo nombre de producto, actualízalo en la tabla producto
+        if (nombre_producto) {
+          // Verificamos si el producto existe en la tabla producto antes de intentar actualizarlo
+          const result = await client.query(
+            `
+            SELECT 1 FROM public.producto WHERE id_producto = $1
+            `,
+            [producto_id_producto]
+          );
+
+          if (result.rowCount > 0) {
+            // El producto existe, actualizamos el nombre
+            await client.query(
+              `
+              UPDATE public.producto
+              SET nombre_producto = $1
+              WHERE id_producto = $2
+              `,
+              [nombre_producto, producto_id_producto]
+            );
+          } else {
+            // El producto no existe, puedes manejar el error de forma adecuada
+            return NextResponse.json(
+              { error: `Producto con ID ${producto_id_producto} no encontrado en la tabla producto.` },
+              { status: 404 }
+            );
+          }
+        }
+
+        // Actualizar el precio en detalle_venta
         await client.query(
           `
           UPDATE public.detalle_venta
@@ -58,7 +86,7 @@ export async function PUT(req: Request) {
         await client.query(
           `
           INSERT INTO public.detalle_venta (venta_num_venta, producto_id_producto, cantidad, precio)
-          VALUES ($1, 1, $2)
+          VALUES ($1, $2, 1, $3)
           ON CONFLICT (id_detalle_venta) DO NOTHING
           `,
           [num_venta, producto_id_producto, precio]
