@@ -41,7 +41,7 @@ export type Pedido = {
   id_detalle_venta: number;
   telefono_movil: string;
   nombres: string;
-  email: string;
+  correo: string;
   fecha_estimada: Date;
   apellido_paterno?: string;
   apellido_materno?: string;
@@ -125,7 +125,7 @@ const ClientActions = ({ cliente }: { cliente: Pedido }) => {
       }
 
       // Mensaje de éxito y cierre del modal
-      setSuccessMessage("Cliente eliminado correctamente"); // Muestra el mensaje
+      setSuccessMessage("Pedido eliminado correctamente"); // Muestra el mensaje
       setIsModalVisible(false); // Cierra el modal
 
       // Oculta el mensaje después de 3 segundos
@@ -161,7 +161,7 @@ const ClientActions = ({ cliente }: { cliente: Pedido }) => {
         <DropdownMenuContent align="end" className="bg-gray-200">
           <DropdownMenuLabel>Acciones</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => navigator.clipboard.writeText(cliente.email)}
+            onClick={() => navigator.clipboard.writeText(cliente.correo)}
           >
             Copiar correo
           </DropdownMenuItem>
@@ -194,7 +194,7 @@ const ClientActions = ({ cliente }: { cliente: Pedido }) => {
         message={
           successMessage
             ? successMessage // Muestra el mensaje de éxito
-            : `¿Estás seguro de que deseas eliminar al cliente ${cliente.nombres}?`
+            : `¿Estás seguro de que deseas eliminar el pedido?`
         }
         onClose={closeModal}
         closeText={successMessage ? "Cerrar" : "Cancelar"}

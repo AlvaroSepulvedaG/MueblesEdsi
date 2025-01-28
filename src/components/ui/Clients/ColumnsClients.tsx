@@ -36,6 +36,7 @@
   import { useRouter } from "next/navigation";
 
   import { Modal } from "@/components/ui/modal";
+  
 
   export type Clientes = {
     rut: string;

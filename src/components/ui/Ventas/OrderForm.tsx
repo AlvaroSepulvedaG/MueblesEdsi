@@ -42,6 +42,7 @@ interface OrderFormProps {
     precio: number;
     id_producto: number;
   }>;
+  correo: string;
   onComplete?: () => void;
 }
 
@@ -51,6 +52,7 @@ export function OrderForm({
   cliente_rut,
   num_venta,
   fecha_estimada,
+  correo,
   productos = [],
   isEditable = false,
   onComplete,

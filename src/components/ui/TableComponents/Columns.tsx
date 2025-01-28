@@ -36,6 +36,7 @@ export type Pedidos = {
   nombre_producto: string; // Nombre del producto
   precio_producto: number; // Precio del producto
   fecha_venta: string; // Fecha de la venta
+  correo: string;
 };
 interface DataTableProps<TData, TValue> {
   columns: Pedidos;
@@ -187,13 +188,13 @@ const ClientActions = ({ cliente }: { cliente: Pedidos }) => {
         <DropdownMenuContent align="end" className="bg-gray-200">
           <DropdownMenuLabel>Acciones</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => navigator.clipboard.writeText(cliente.email)}
+            onClick={() => navigator.clipboard.writeText(cliente.correo)}
           >
             Copiar correo
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() =>
-              navigator.clipboard.writeText(cliente.telefono_movil)
+              navigator.clipboard.writeText(cliente.telefono_movil.toString())
             }
           >
             Copiar teléfono

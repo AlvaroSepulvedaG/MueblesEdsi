@@ -27,6 +27,7 @@ async function getData(): Promise<Pedido[]> {
       id_detalle_venta: row.id_detalle_venta,
       nombre_producto: row.nombre_producto,
       precio: row.precio,
+      correo: row.correo,
     }));
     console.log(res)
   } catch (error) {

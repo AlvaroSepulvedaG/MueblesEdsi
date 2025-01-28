@@ -6,11 +6,21 @@ async function getData(): Promise<Pedidos[]> {
   try {
     const order = await pool.connect();
     const res = await order.query(
-      `SELECT * FROM public.venta vnt
-       INNER JOIN public.detalle_venta dt ON vnt.num_venta = dt.venta_num_venta
-       INNER JOIN public.producto prd ON dt.producto_id_producto = prd.id_producto
-       WHERE dt.estado != 'Entregado'
-       ORDER BY dt.id_detalle_venta ASC`
+      `SELECT 
+  vnt.*, 
+  dt.*, 
+  prd.*, 
+  cli.telefono_movil, 
+  cli.correo, 
+  cli.nombres AS cliente_nombres,
+  cli.apellido_paterno AS cliente_apellido_paterno,
+  cli.apellido_materno AS cliente_apellido_materno
+FROM public.venta vnt
+INNER JOIN public.detalle_venta dt ON vnt.num_venta = dt.venta_num_venta
+INNER JOIN public.producto prd ON dt.producto_id_producto = prd.id_producto
+INNER JOIN public.cliente cli ON vnt.cliente_rut = cli.rut
+WHERE dt.estado != 'Entregado'
+ORDER BY dt.id_detalle_venta ASC;`
     );
     order.release();
 
@@ -27,6 +37,7 @@ async function getData(): Promise<Pedidos[]> {
       direccion: row.direccion,
       num_venta: row.num_venta,
       id_detalle_venta: row.id_detalle_venta,
+      correo: row.correo,
     }));
   } catch (error) {
     console.error("Error fetching client data:", error);
