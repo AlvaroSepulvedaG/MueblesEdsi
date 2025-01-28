@@ -10,6 +10,7 @@ interface UpdateData {
   items: Array<{
     producto_id_producto?: string;
     precio?: number;
+    nombre_producto?: string;
   }>;
 }
 export async function PUT(req: Request) {
