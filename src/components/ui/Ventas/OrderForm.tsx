@@ -27,7 +27,6 @@ interface OrderFormProps {
   abono?: number;
   cod_producto?: string;
   num_venta?: number;
-
   id_detalle_venta?: number;
   fecha_estimada?: Date;
   direccion?: string;
@@ -42,7 +41,7 @@ interface OrderFormProps {
     precio: number;
     id_producto: number;
   }>;
-  correo: string;
+  correo?: string;
   onComplete?: () => void;
 }
 
