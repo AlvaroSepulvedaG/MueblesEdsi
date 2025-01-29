@@ -1,0 +1,424 @@
+--Carga Estado Civil
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/estado civil.csv'
+INTO TABLE `estado civil`
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(`nombre_estado_civil`);  nombre_estado_civil
+
+--Carga Comuna
+
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/comunas.csv'
+INTO TABLE comuna
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n' 
+IGNORE 1 LINES
+(nombre_comuna);
+
+
+-- Carga producto
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/lista_precios.csv' 
+INTO TABLE producto 
+FIELDS TERMINATED BY ';' 
+ENCLOSED BY '"' 
+LINES TERMINATED BY '\n'  
+IGNORE 1 LINES 
+(@articulo, cod_producto, @precio_contado, @num_cuotas)  
+SET 
+    nombre_producto = @articulo,  -- Asignar el nombre del producto
+    precio_producto = CAST(REPLACE(REPLACE(@precio_contado, '.', ''), ',', '') AS UNSIGNED); -- Convertir precio a INT
+
+
+--carga cliente
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/maestro_clientes.csv'
+INTO TABLE cliente
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(@cta, @f_ing, @rut, nombres, apellido_paterno, apellido_materno, @estado_civil, @fecha_nacimiento, dirección, @comuna, @telefono_fijo, @telefono_movil, correo, @sit_habitac, comentarios, @emitir_pagare)
+SET
+    rut = LEFT(REPLACE(REPLACE(REPLACE(@rut, '.', ''), '-', ''), ' ', ''), 9),  -- Limpiar RUT
+    estado_civil_id_estado_civil = COALESCE(
+        (SELECT id_estado_civil FROM estado_civil WHERE nombre_estado_civil = @estado_civil LIMIT 1),
+        3  -- Asignar ID 3 si no se encuentra coincidencia
+    ),
+    comuna_id_comuna = COALESCE(
+        (SELECT id_comuna FROM comuna WHERE nombre_comuna = @comuna LIMIT 1),
+        25  -- Asignar ID 25 si no se encuentra coincidencia
+    ),
+    fecha_nacimiento = 
+        CASE
+            WHEN @fecha_nacimiento LIKE '%-ene%' THEN '01-01'  -- Asignar 1 de enero
+            WHEN @fecha_nacimiento REGEXP '^[0-9]{2}-[0-9]{2}-[0-9]{4}$' THEN SUBSTRING(@fecha_nacimiento, 1, 5)  -- Extraer día y mes
+            ELSE NULL  -- Asignar NULL si no es un formato esperado
+        END,
+    telefono_fijo = NULLIF(REPLACE(REPLACE(REPLACE(REPLACE(@telefono_fijo, '(', ''), ')', ''), '-', ''), ' ', ''), ''),  -- Limpiar teléfono fijo
+    telefono_movil = NULLIF(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(@telefono_movil, '(', ''), ')', ''), '-', ''), ' ', ''), '0', ''), '9', ''), '8', ''), '')
+
+
+
+--carga venta
+
+--VENTAS_CONTADO.CSV
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ventas_contado.csv'
+INTO TABLE venta
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(@N_venta, @`Fecha de venta`, @RUT, @Art_1, @Precio_1, @C_1, @Art_2, @Precio_2, @C_2, @Art_3, @Precio_3, @C_3, @Art_4, @Precio_4, @C_4, @Art_5, @Precio_5, @C_5, @observaciones, @Entregado)
+SET
+    num_venta = @N_venta,
+    cliente_rut = REPLACE(REPLACE(@RUT, '.', ''), '-', ''),  -- Limpiar RUT
+    fecha_venta = STR_TO_DATE(@`Fecha de venta`, '%d-%m-%Y'),
+    fecha_entrega = NULL,
+    estado = IF(@Entregado = 1, 'Entregado', 'Pendiente'),      abono = NULL;
+
+--ventas_credito.csv 
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ventas_credito.csv'  
+INTO TABLE venta  
+FIELDS TERMINATED BY ';'  
+ENCLOSED BY '"'  
+LINES TERMINATED BY '\n'  
+IGNORE 1 LINES  
+(@N_venta, @`Fecha de Venta`, @RUT, @Cod_1, @Art_1, @Precio_1, @Cant_1, @Cod_2, @Art_2, @Precio_2, @Cant_2, @Cod_3, @Art_3, @Precio_3, @Cant_3, @Cod_4, @Art_4, @Precio_4, @Cant_4, @Cod_5, @Art_5, @Precio_5, @Cant_5, @Porcentaje, @`N° cuotas`, @Pie, @Observaciones, @Entregado)  
+SET  
+    num_venta = @N_venta,  -- Usa el número de venta desde el CSV  
+    cliente_rut = REPLACE(REPLACE(REPLACE(@RUT, '.', ''), '-', ''), ',', ''),  -- Limpiar RUT
+    fecha_venta = STR_TO_DATE(@`Fecha de Venta`, '%d-%m-%Y'),  
+    fecha_entrega = NULL,  
+    estado = IF(@Entregado = '0', 'Pendiente', 'Entregado'),  
+    abono = NULL;  
+
+--detalle_venta
+
+-- creación tabla temporal
+
+CREATE TABLE ventas_temp (
+    num_venta INT,
+    fecha_venta DATE,
+    rut VARCHAR(12),
+    Cod_1 VARCHAR(9),
+    Art_1 VARCHAR(100),
+    Precio_1 DECIMAL(10, 2),
+    Cant_1 INT,
+    Cod_2 VARCHAR(9),
+    Art_2 VARCHAR(100),
+    Precio_2 DECIMAL(10, 2),
+    Cant_2 INT,
+    Cod_3 VARCHAR(9),
+    Art_3 VARCHAR(100),
+    Precio_3 DECIMAL(10, 2),
+    Cant_3 INT,
+    Cod_4 VARCHAR(9),
+    Art_4 VARCHAR(100),
+    Precio_4 DECIMAL(10, 2),
+    Cant_4 INT,
+    Cod_5 VARCHAR(9),
+    Art_5 VARCHAR(100),
+    Precio_5 DECIMAL(10, 2),
+    Cant_5 INT,
+    Porcentaje DECIMAL(5, 2),
+    N_cuotas INT,
+    Pie DECIMAL(10, 2),
+    Observaciones VARCHAR(255),
+    Entregado INT
+);
+
+--poblar detalle_ventas
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ventas_credito.csv'
+INTO TABLE ventas_temp
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(N°_Venta, Fecha_de_Venta, rut, Cod_1, Art_1, Precio_1, Cant_1, Cod_2, Art_2, Precio_2, Cant_2, Cod_3, Art_3, Precio_3, Cant_3, Cod_4, Art_4, Precio_4, Cant_4, Cod_5, Art_5, Precio_5, Cant_5, Porcentaje, N°_cuotas, Observaciones, Entregado);
+
+
+INSERT INTO ventas_temp (N°_Venta, Fecha_de_Venta, rut, Cod_1, Art_1, Precio_1, Cant_1, Cod_2, Art_2, Precio_2, Cant_2, Cod_3, Art_3, Precio_3, Cant_3, Cod_4, Art_4, Precio_4, Cant_4, Cod_5, Art_5, Precio_5, Cant_5, Porcentaje, N°_cuotas, Pie, Observaciones, Entregado)
+
+
+SELECT N°_Venta, Fecha_de_Venta, rut, Cod_1, Art_1, Precio_1, Cant_1, Cod_2, Art_2, Precio_2, Cant_2, Cod_3, Art_3, Precio_3, Cant_3, Cod_4, Art_4, Precio_4, Cant_4, Cod_5, Art_5, Precio_5, Cant_5, Porcentaje, N°_cuotas, NULL AS Pie, Observaciones, Entregado FROM ventas_temp;
+
+INSERT INTO detalle_venta (cantidad, Producto_cod_producto, Venta_num_venta, precio)
+SELECT Cant_1, Cod_1, num_venta, Precio_1 * Cant_1 FROM ventas_temp WHERE Cod_1 IS NOT NULL AND Cod_1 != '' AND Cant_1 > 0
+UNION ALL
+SELECT Cant_2, Cod_2, num_venta, Precio_2 * Cant_2 FROM ventas_temp WHERE Cod_2 IS NOT NULL AND Cod_2 != '' AND Cant_2 > 0
+UNION ALL
+SELECT Cant_3, Cod_3, num_venta, Precio_3 * Cant_3 FROM ventas_temp WHERE Cod_3 IS NOT NULL AND Cod_3 != '' AND Cant_3 > 0
+UNION ALL
+SELECT Cant_4, Cod_4, num_venta, Precio_4 * Cant_4 FROM ventas_temp WHERE Cod_4 IS NOT NULL AND Cod_4 != '' AND Cant_4 > 0
+UNION ALL
+SELECT Cant_5, Cod_5, num_venta, Precio_5 * Cant_5 FROM ventas_temp WHERE Cod_5 IS NOT NULL AND Cod_5 != '' AND Cant_5 > 0;
+
+
+--drop tabla temporal
+DROP TABLE ventas_temp;
+
+
+
+
+
+
+-- creación tabla temporal
+
+CREATE TABLE ventas_temp (
+    N_venta INT,
+    Fecha_de_venta DATE,  #conversion nombre csv
+    RUT VARCHAR(12),
+    Art_1 VARCHAR(100),
+    Precio_1 DECIMAL(10, 2),
+    C_1 INT,
+    Art_2 VARCHAR(100),
+    Precio_2 DECIMAL(10, 2),
+    C_2 INT,
+    Art_3 VARCHAR(100),
+    Precio_3 DECIMAL(10, 2),
+    C_3 INT,
+    Art_4 VARCHAR(100),
+    Precio_4 DECIMAL(10, 2),
+    C_4 INT,
+    Art_5 VARCHAR(100),
+    Precio_5 DECIMAL(10, 2),
+    C_5 INT,
+    Observaciones VARCHAR(255),
+    Entregado INT
+);
+
+--poblar detalle_ventas
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ventas_contado.csv'
+INTO TABLE ventas_temp
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(N_venta, Fecha_de_Venta, RUT, Art_1, Precio_1, C_1, Art_2, Precio_2, C_2, Art_3, Precio_3, C_3, Art_4, Precio_4, C_4, Art_5, Precio_5, C_5, Observaciones, Entregado);
+
+
+INSERT INTO ventas_temp (N_venta, Fecha_de_Venta, RUT, Art_1, Precio_1, C_1, Art_2, Precio_2, C_2, Art_3, Precio_3, C_3, Art_4, Precio_4, C_4, Art_5, Precio_5, C_5, Observaciones, Entregado)
+
+
+SELECT N_venta, Fecha_de_Venta, RUT, Art_1, Precio_1, C_1, Art_2, Precio_2, C_2, Art_3, Precio_3, C_3, Art_4, Precio_4, C_4, Art_5, Precio_5, C_5, Observaciones, Entregado FROM ventas_temp;
+
+#Por acá debería hacer un JOIN con la tabla producto (específicamente con la columna nombre_producto, haciendo match con Art_1, Art_2...etc) Tiene que hacerse de forma tal que luego pueda insertarlos por separado en la tabla de detalle_venta
+
+#realizar insercion
+
+--drop tabla temporal
+DROP TABLE ventas_temp;
+
+
+
+##AHORA SI VENTAS CONTADO
+
+-- Creación de la tabla temporal para almacenar los datos del CSV
+CREATE TABLE ventas_temp (
+    N_venta INT,
+    Fecha_de_venta DATE,
+    RUT VARCHAR(12),
+    Art_1 VARCHAR(100),
+    Precio_1 DECIMAL(10, 2),
+    C_1 INT,
+    Art_2 VARCHAR(100),
+    Precio_2 DECIMAL(10, 2),
+    C_2 INT,
+    Art_3 VARCHAR(100),
+    Precio_3 DECIMAL(10, 2),
+    C_3 INT,
+    Art_4 VARCHAR(100),
+    Precio_4 DECIMAL(10, 2),
+    C_4 INT,
+    Art_5 VARCHAR(100),
+    Precio_5 DECIMAL(10, 2),
+    C_5 INT,
+    Observaciones VARCHAR(255),
+    Entregado INT
+);
+
+-- Cargar los datos del archivo CSV en la tabla temporal
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ventas_contado.csv'
+INTO TABLE ventas_temp
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(N_venta, Fecha_de_Venta, RUT, Art_1, Precio_1, C_1, Art_2, Precio_2, C_2, Art_3, Precio_3, C_3, Art_4, Precio_4, C_4, Art_5, Precio_5, C_5, Observaciones, Entregado);
+
+-- Insertar los datos normalizados en la tabla detalle_venta
+INSERT INTO detalle_venta (cantidad, Producto_cod_producto, Venta_num_venta, precio)
+SELECT 
+    C_1 AS cantidad,
+    IFNULL(p1.cod_producto, 'XX-0000') AS cod_producto,
+    vt.N_venta,
+    IF(p1.cod_producto IS NULL, Precio_1 * C_1, Precio_1 * C_1) AS precio
+FROM ventas_temp vt
+LEFT JOIN producto p1 ON vt.Art_1 = p1.nombre_producto
+WHERE C_1 IS NOT NULL AND C_1 > 0 AND IFNULL(Precio_1 * C_1, 0) > 0
+
+UNION ALL
+
+SELECT 
+    C_2 AS cantidad,
+    IFNULL(p2.cod_producto, 'XX-0000') AS cod_producto,
+    vt.N_venta,
+    IF(p2.cod_producto IS NULL, Precio_2 * C_2, Precio_2 * C_2) AS precio
+FROM ventas_temp vt
+LEFT JOIN producto p2 ON vt.Art_2 = p2.nombre_producto
+WHERE C_2 IS NOT NULL AND C_2 > 0 AND IFNULL(Precio_2 * C_2, 0) > 0
+
+UNION ALL
+
+SELECT 
+    C_3 AS cantidad,
+    IFNULL(p3.cod_producto, 'XX-0000') AS cod_producto,
+    vt.N_venta,
+    IF(p3.cod_producto IS NULL, Precio_3 * C_3, Precio_3 * C_3) AS precio
+FROM ventas_temp vt
+LEFT JOIN producto p3 ON vt.Art_3 = p3.nombre_producto
+WHERE C_3 IS NOT NULL AND C_3 > 0 AND IFNULL(Precio_3 * C_3, 0) > 0
+
+UNION ALL
+
+SELECT 
+    C_4 AS cantidad,
+    IFNULL(p4.cod_producto, 'XX-0000') AS cod_producto,
+    vt.N_venta,
+    IF(p4.cod_producto IS NULL, Precio_4 * C_4, Precio_4 * C_4) AS precio
+FROM ventas_temp vt
+LEFT JOIN producto p4 ON vt.Art_4 = p4.nombre_producto
+WHERE C_4 IS NOT NULL AND C_4 > 0 AND IFNULL(Precio_4 * C_4, 0) > 0
+
+UNION ALL
+
+SELECT 
+    C_5 AS cantidad,
+    IFNULL(p5.cod_producto, 'XX-0000') AS cod_producto,
+    vt.N_venta,
+    IF(p5.cod_producto IS NULL, Precio_5 * C_5, Precio_5 * C_5) AS precio
+FROM ventas_temp vt
+LEFT JOIN producto p5 ON vt.Art_5 = p5.nombre_producto
+WHERE C_5 IS NOT NULL AND C_5 > 0 AND IFNULL(Precio_5 * C_5, 0) > 0;
+
+
+
+-- Eliminar la tabla temporal una vez finalizada la operación
+DROP TABLE ventas_temp;
+
+
+
+
+#AHORA SI VENTAS CREDITO
+
+CREATE TABLE ventas_temp (
+    num_venta INT,
+    fecha_venta DATE,
+    rut VARCHAR(12),
+    Cod_1 VARCHAR(9),
+    Art_1 VARCHAR(100),
+    Precio_1 DECIMAL(10, 2),
+    Cant_1 INT,
+    Cod_2 VARCHAR(9),
+    Art_2 VARCHAR(100),
+    Precio_2 DECIMAL(10, 2),
+    Cant_2 INT,
+    Cod_3 VARCHAR(9),
+    Art_3 VARCHAR(100),
+    Precio_3 DECIMAL(10, 2),
+    Cant_3 INT,
+    Cod_4 VARCHAR(9),
+    Art_4 VARCHAR(100),
+    Precio_4 DECIMAL(10, 2),
+    Cant_4 INT,
+    Cod_5 VARCHAR(9),
+    Art_5 VARCHAR(100),
+    Precio_5 DECIMAL(10, 2),
+    Cant_5 INT,
+    Porcentaje DECIMAL(5, 2),
+    N_cuotas INT,
+    Pie DECIMAL(10, 2),
+    Observaciones VARCHAR(255),
+    Entregado INT
+);
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/ventas_credito.csv'
+INTO TABLE ventas_temp
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(num_venta, fecha_venta, rut, Cod_1, Art_1, Precio_1, Cant_1, Cod_2, Art_2, Precio_2, Cant_2, Cod_3, Art_3, Precio_3, Cant_3, Cod_4, Art_4, Precio_4, Cant_4, Cod_5, Art_5, Precio_5, Cant_5, Porcentaje, N_cuotas, Pie, Observaciones, Entregado);
+
+INSERT INTO detalle_venta (cantidad, Producto_cod_producto, Venta_num_venta, precio)
+SELECT 
+    Cant_1 AS cantidad, 
+    CASE 
+        WHEN Cod_1 IN ('MA-0023', 'MA-0019', 'CJ/0004', 'MM/0001', 'EO-0001', 'PI/0003') THEN 'XX-0000'
+        ELSE IFNULL(Cod_1, 'XX-0000') 
+    END AS Producto_cod_producto, 
+    num_venta AS Venta_num_venta, 
+    Precio_1 * Cant_1 AS precio 
+FROM ventas_temp 
+WHERE Cod_1 IS NOT NULL AND Cod_1 != '' AND Cant_1 > 0
+
+UNION ALL
+
+SELECT 
+    Cant_2 AS cantidad, 
+    CASE 
+        WHEN Cod_2 IN ('MA-0023', 'MA-0019', 'CJ/0004', 'MM/0001', 'EO-0001', 'PI/0003') THEN 'XX-0000'
+        ELSE IFNULL(Cod_2, 'XX-0000') 
+    END AS Producto_cod_producto, 
+    num_venta AS Venta_num_venta, 
+    Precio_2 * Cant_2 AS precio 
+FROM ventas_temp 
+WHERE Cod_2 IS NOT NULL AND Cod_2 != '' AND Cant_2 > 0
+
+UNION ALL
+
+SELECT 
+    Cant_3 AS cantidad, 
+    CASE 
+        WHEN Cod_3 IN ('MA-0023', 'MA-0019', 'CJ/0004', 'MM/0001', 'EO-0001', 'PI/0003') THEN 'XX-0000'
+        ELSE IFNULL(Cod_3, 'XX-0000') 
+    END AS Producto_cod_producto, 
+    num_venta AS Venta_num_venta, 
+    Precio_3 * Cant_3 AS precio 
+FROM ventas_temp 
+WHERE Cod_3 IS NOT NULL AND Cod_3 != '' AND Cant_3 > 0
+
+UNION ALL
+
+SELECT 
+    Cant_4 AS cantidad, 
+    CASE 
+        WHEN Cod_4 IN ('MA-0023', 'MA-0019', 'CJ/0004', 'MM/0001', 'EO-0001', 'PI/0003') THEN 'XX-0000'
+        ELSE IFNULL(Cod_4, 'XX-0000') 
+    END AS Producto_cod_producto, 
+    num_venta AS Venta_num_venta, 
+    Precio_4 * Cant_4 AS precio 
+FROM ventas_temp 
+WHERE Cod_4 IS NOT NULL AND Cod_4 != '' AND Cant_4 > 0
+
+UNION ALL
+
+SELECT 
+    Cant_5 AS cantidad, 
+    CASE 
+        WHEN Cod_5 IN ('MA-0023', 'MA-0019', 'CJ/0004', 'MM/0001', 'EO-0001', 'PI/0003') THEN 'XX-0000'
+        ELSE IFNULL(Cod_5, 'XX-0000') 
+    END AS Producto_cod_producto, 
+    num_venta AS Venta_num_venta, 
+    Precio_5 * Cant_5 AS precio 
+FROM ventas_temp 
+WHERE Cod_5 IS NOT NULL AND Cod_5 != '' AND Cant_5 > 0;
+
+DROP TABLE ventas_temp;
+

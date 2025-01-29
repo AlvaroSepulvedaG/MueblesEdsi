@@ -1,0 +1,527 @@
+﻿ARTICULO;CODIGO;PRECIO CONTADO;N° CUOTAS
+Asta de Bandera;AB-0001;1.255.000,00;4
+Alfombra chica;AF-0001;2.450,00;4
+Almohada 1 plaza.;AL-0001;3.325,00;4
+Almohada 1 1/2 plaza.;AL-0002;3.620,00;4
+Almohada americana;AL-0003;3.465,00;4
+Almohadon chico;AL-0004;1.500,00;5
+Alacena especial;AL-0005;11.000,00;1
+Arrimo metalico vidrio;AR-0001;13.500,00;5
+Arrimo madera chico;AR-0002;42.000,00;6
+Arrimo madera mediano;AR-0003;49.000,00;6
+Arrimo madera recto;AR-0004;44.000,00;6
+Bandejas de melamina;BA-0001;1,00;4
+Baúl Juguetes chico;BJ-0001;12.000,00;4
+Baúl Juguetes grande;BJ-0002;18.000,00;4
+Biblioteca Claudio 2 cps.;BL-0001;96.000,00;8
+Biblioteca Claudio 3 cps.;BL-0002;135.000,00;8
+Biblioteca copero grande;BL-0003;150.000,00;10
+Biblioteca española;BL-0004;120.000,00;8
+Biblioteca florentina;BL-0005;78.000,00;8
+Biblioteca quinta;BL-0006;140.000,00;8
+Biblioteca Charlie;BL-0007;135.000,00;8
+Biblioteca Salomónica;BL-0008;130.000,00;8
+Biblioteca Bar mélody;BL-0009;230.000,00;10
+Biblioteca quinta 2 cps.;BL-0010;110.000,00;8
+Biblioteca copero chica;BL-0011;98.000,00;10
+Biblioteca Imperio;BL-0012;190.000,00;10
+Biblioteca balaustro chica;BL-0013;40.000,00;8
+Biblioteca Rack;BL-0014;70.000,00;8
+Biblioteca especial;BL-0015;1,00;8
+Base mesa de cristal;BM-0001;12.500,00;8
+Base mesa de cristal etruzca;BM-0002;30.000,00;6
+Base mesa de cristal etruzca patinada;BM-0003;37.500,00;8
+Botiquín chico;BO-0001;11.000,00;4
+Botiquin colonial doble;BO-0002;25.000,00;5
+Botiquín colonial sin luz;BO-0003;14.000,00;5
+Botiquin alerce grande;BO-0004;14.000,00;6
+Botiquin especial;BO-0005;1,00;1
+Botellero especial;BO-0006;1,00;1
+Bar germaín;BR-0001;130.000,00;10
+Bar Venus;BR-0002;130.000,00;6
+Batidora electrón;BT-0001;17.200,00;4
+Cubierta ovalada cristal;CB-0001;37.500,00;6
+Cubierta redonda cristal;CB-0002;37.500,00;6
+Cubierta especial;CB-0003;1,00;5
+Cubierta lavaplatos 0,80;CB-0004;30.000,00;5
+Cubierta lavaplatos 1,0;CB-0005;30.000,00;6
+Cubierta formalita especial;CB-0010;1,00;6
+Cubrecolchon 1 1/2 plaza.;CC-0001;4.900,00;5
+Cubre Colchón 2 Plazas.;CC-0002;7.500,00;4
+Comedor Infantil;CD-0001;35.000,00;5
+Comedor cristal con 6 sillas metal.;CD-0002;130.000,00;8
+Comedor cristal con 4 sillas 2 sitiales;CD-0003;115.000,00;8
+Comedor extensión euc. Y 6 sillas Coloniales;CD-0004;145.000,00;10
+Comedor extensión euc. Y 6 sillas Da Vinci;CD-0005;148.000,00;10
+comedor cristal con 6 sillas económicas;CD-0006;90.000,00;8
+Comedor economico madera;CD-0007;85.000,00;8
+Comedor extensión c/6 sillas economicas;CD-0008;130.000,00;8
+Comedor Redondo Ext.encina  6 sillas italianas;CD-0009;220.000,00;10
+Comedor ceramica 4 sillas;CD-0010;120.000,00;8
+Comedor cerámica 6 sillas;CD-0011;195.000,00;10
+Comedor fijo pino 6 sillas;CD-0012;120.000,00;8
+Cubierta especial a medida;CE-0001;1,00;4
+Cuotas futuras;CF-0001;1,00;4
+Colchón Esp.D.21 1 1/2x15 liso;CH-0001;42.770,00;6
+Colchón Esp.D.21 1 1/2x15 Ac.;CH-0002;47.350,00;6
+Colchón Esp.D.21 1 1/2x20 Ac.;CH-0003;68.000,00;6
+Colchón Esp.D.21 1x15 liso;CH-0004;37.100,00;6
+Colchón Esp.D.21 1x15 Ac.;CH-0005;32.600,00;6
+Colchón Esp.D.21 1x20 Ac.;CH-0006;48.200,00;6
+Colchón Esp.D.21 2x15 Ac.;CH-0007;65.500,00;6
+Colchón Esp.D.21 2x20 Ac.;CH-0008;79.650,00;6
+Colchón Esp.D.24 1 1/2x15 Ac.;CH-0009;53.630,00;6
+Colchón Esp.D.24 1 1/2x20 Ac.;CH-0010;69.100,00;6
+Colchón Esp.D.24 1x15 Ac.;CH-0011;46.130,00;6
+Colchón Esp.D.24 1x20 Ac.;CH-0012;59.100,00;6
+Colchón Esp.D.24 2x15 Ac.;CH-0013;75.345,00;6
+Colchón Esp.D.24 2x20 Ac.;CH-0014;96.740,00;6
+Colchón Resortes 1 plaza;CH-0015;59.100,00;6
+Colchón Resortes 1 1/2 plaza;CH-0016;67.850,00;6
+Colchón Resortes 2 plazas;CH-0017;97.000,00;6
+Colchón Esp.D.21 2x15 liso;CH-0018;61.300,00;6
+Colchón Esp.D 24 1 1/2 x 20 Ac.;CH-0019;48.850,00;6
+Colchòn cuna 1,2 x 0,6 liso;CH-0022;3.000,00;4
+Colchón Esp. D. 18 1 1/2 x 15 liso;CH-0023;28.300,00;6
+Colchón resorte Full;CH-0024;97.380,00;6
+Colchón resortes King;CH-0025;123.600,00;6
+Cajonera carola;CJ-0001;38.000,00;5
+Cajonera económica;CJ-0002;30.000,00;5
+Cajonera Grande;CJ-0003;40.000,00;6
+Cajonera grande melamina;CJ-0004;40.000,00;5
+Cajonera Especial;CJ-0005;34.000,00;5
+Cajonera trupan Bebé;CJ-0006;32.000,00;5
+Cajonera chica 5 cajones;CJ-0007;28.000,00;4
+Cajonera Chica melamina;CJ-0008;30.000,00;5
+Cajonera economica eucaliptus;CJ-0009;22.000,00;5
+Cajonera economica melamina;CJ-0010;26.000,00;5
+Cajonera extra;CJ-0011;40.000,00;6
+Cajonera Disney;CJ-0012;32.000,00;5
+Cajonera chica DVD;CJ-0013;38.000,00;6
+Cajonera grande DVD;CJ-0014;44.000,00;6
+Cajon mueble de cocina;CJ-0015;1,00;1
+Closet mini Melamina;CL-0001;65.000,00;5
+Closet 0,90;CL-0002;72.000,00;8
+Closet chico 4 cajones;CL-0003;65.000,00;6
+Closet chico puerta larga;CL-0004;60.000,00;6
+Closet chico con maletero;CL-0005;65.000,00;6
+Closet 1,20x1,80 con maletero;CL-0006;115.000,00;8
+closet 1,20x1,80;CL-0007;95.000,00;8
+Closet 1,50x1,80;CL-0008;160.000,00;8
+Closet 1,50x1,80 con maletero;CL-0009;150.000,00;8
+Closet trupán;CL-0010;40.000,00;6
+Closet especial;CL-0011;780.000,00;8
+Closet melamina;CL-0012;85.000,00;8
+Cuna madera económica;CN-0001;39.000,00;5
+Cama nido Challenger 1 pza.;CN-0002;72.000,00;6
+Cama Nido Challenger 1 1/2 pza;CN-0003;78.000,00;6
+Cama nido eucaliptus 1 plaza.;CN-0004;72.000,00;6
+Cuna cajonera lacada;CN-0005;84.000,00;6
+Cuna economica;CN-0006;60.000,00;8
+Cuna especial;CN-0007;1,00;5
+Cuna multiple.;CN-0008;140.000,00;8
+Caja de negocio;cn-0009;1,00;1
+Comoda carola;CO-0001;35.000,00;5
+Cómoda chica 4 cajones. Eucaliptus;CO-0002;28.000,00;4
+Comoda economica;CO-0003;26.000,00;5
+Cómoda grande 5 cajones;CO-0004;28.000,00;6
+Comoda grande melamina Zambo;CO-0005;38.000,00;6
+Comoda mediana J.C.;CO-0006;35.000,00;5
+Cómoda melamina 4 cajones;CO-0007;45.000,00;5
+Cómoda 7 cajones;CO-0008;45.000,00;6
+Cómoda Jumbo;CO-0009;48.000,00;5
+Cómoda especial;CO-0010;38.000,00;6
+Cómoda peinador;CO-0011;45.000,00;5
+Comodon 6 cajones;CO-0012;40.000,00;6
+Comoda trupan blanca lacada;CO-0013;35.000,00;5
+Comoda doble 10 cajones.;CO-0014;60.000,00;6
+Comoda grande 5 cajones especial;CO-0015;42.000,00;6
+Cómoda Disney;CO-0016;30.000,00;5
+Cómoda melamina grande;CO-0017;32.000,00;6
+Cómoda estante;CO-0018;40.000,00;6
+Comoda chica DVD;CO-0019;40.000,00;6
+Cómoda grande DVD;CO-0020;45.000,00;6
+Cómoda DVD Grande Juan;CO-0021;85.000,00;1
+Cómoda mudador;CO-0023;60.000,00;6
+Cajon para pan;CP-0001;30.000,00;4
+Caja de negocio;cr-0001;1,00;1
+Camarote Bambú 1 plaza;CT-0001;72.000,00;6
+Camarote Colonial 1 1/2 plaza;CT-0002;78.000,00;6
+Camarote acuarela 1 plaza;CT-0003;79.000,00;6
+Camarote colonial 1 plaza;CT-0004;82.000,00;8
+Camarote triple 1 plaza.;CT-0005;105.000,00;6
+Camarote eucaliptus fijo 1 pza.;CT-0006;88.000,00;6
+Camarote 1-1/2 plaza;CT-0007;89.000,00;6
+Camarote linea plana 1 plaza;CT-0008;69.000,00;6
+Camarote linea plana 1 1/2 plaza.;CT-0009;105.000,00;8
+Camarote Bambú 1 1/2 plaza;CT-0010;82.000,00;6
+Camarote Jumbo 1 plaza.;CT-0011;72.000,00;6
+Camarote Rino 1 plaza;CT-0012;75.000,00;6
+Camarote acuarela 1 1/2 plaza.;CT-0013;82.000,00;8
+Cubrecamas 1 plaza;CU-0001;9.250,00;4
+Cubrecamas 1 1/2 plaza;CU-0002;9.890,00;4
+Cubrecamas 2 plazas;CU-0003;14.324,00;4
+Cubrecuna;CU-0004;4.000,00;4
+Documento protestado;DP-0001;1,00;1
+Despensa simple melamina;DS-0001;38.000,00;6
+Despensa simple lacada;DS-0002;42.000,00;6
+Despensa simple eucaliptus;DS-0003;48.000,00;6
+Despensa doble lacada;DS-0004;70.000,00;6
+Despensa microondas lacada;DS-0005;72.000,00;6
+Despensa microondas lisa;DS-0006;52.000,00;6
+Despensa especial;DS-0007;2,00;1
+Despensa doble melamina;DS-0008;45.000,00;5
+Despensa doble lacada;DS-0009;58.000,00;6
+Diván cama 1 plaza;DV-0001;34.000,00;5
+Diván cama 1 1/2 plaza;DV-0002;36.000,00;5
+Diván Cama 2 plazas;DV-0003;47.000,00;5
+Elevación 2 puertas melamina;EL-0001;24.000,00;4
+Elevación 3 puertas melamina;EL-0002;32.000,00;5
+Elevacion colonial 2 puertas;EL-0003;30.000,00;5
+Elevación colonial 3 puertas;EL-0004;38.000,00;5
+Elevación especial;EL-0005;95.000,00;1
+Espejo aluminio 1 x 45;EP-0001;11.000,00;4
+Espejo con luz grande;EP-0002;17.800,00;4
+Espejo marco de madera;EP-0003;4.500,00;4
+Espejo personalizado;EP-0004;25.000,00;5
+Esquinero simple;EQ-0001;80.000,00;8
+Esquinero lacado;EQ-0002;98.000,00;8
+Esquinero rombo;EQ-0003;92.000,00;8
+Escritorio melamina;ES-0001;20.000,00;5
+Escritorio moderno comput.;ES-0002;55.000,00;6
+Escritorio arturo;ES-0003;80.000,00;8
+Esquinero metálico con luz;ES-0004;18.400,00;4
+Escritorio a medida;ES-0005;1,00;5
+Escritorio chico;ES-0006;32.000,00;6
+Escritorio grande;ES-0007;48.000,00;6
+Escritorio computacion grande;ES-0008;54.000,00;6
+Escritorio computacion economico;ES-0009;22.000,00;5
+Estante especial;ET-0001;280.000,00;6
+Estante de baño;ET-0002;1,00;1
+Estante de cocina;ET-0003;1,00;1
+Flete;FL-0001;1,00;1
+Fleje 1- 1 1/2;FL-0002;400,00;1
+Fleje 2;FL-0003;850,00;1
+Frazada 1 1/2 plaza lanabella;FR-0002;7.650,00;4
+Frazada 2 plazas lanabella;FR-0003;14.172,00;4
+Chalón clasico;FR-0006;7.610,00;4
+Hervidor de agua;HA-0001;21.000,00;4
+Mercaderia Humberto Acuña;HA-0002;1,00;1
+Instalación o armado de mueble;IM-0001;1,00;1
+Instalación de mueble;IN-0001;1,00;1
+Isla normal;IS-0001;35.000,00;5
+Isla grande;IS-0002;50.000,00;5
+Isla chica;IS-0003;25.000,00;5
+Isla especial;IS-0004;1,00;1
+Juego de loza 30 Pzs.;JL-0001;15.900,00;4
+Juego de ollas cristal;JO-0001;25.900,00;5
+Lampara de velador;LA-0001;2.000,00;4
+Lampara de sobremesa;LA-0002;12.000,00;4
+Licuadora electrón;LC-0001;34.000,00;4
+Cubierta lavaplatos empotrado 0,8;le-0001;48.000,00;1
+Cubierta lavaplatos empotrado 1,15;le-0002;85.000,00;1
+Cubierta lavaplatos empotrado 1,24;le-0003;98.000,00;1
+Cubierta lavaplatos empotrado especial;le-0004;1,00;1
+Largueros de coigue;LG-0001;9.500,00;4
+Largueros de pino;LG-0002;8.500,00;1
+Largueros de pino interiores;LG-0003;14.500,00;1
+Largueros de coigue interiores;LG-0004;18.500,00;1
+Living cubo chintz;LI-0001;110.000,00;8
+Living curvo;LI-0002;196.000,00;10
+Living romanito chintz;LI-0003;130.000,00;8
+Living romano felpa;LI-0004;200.000,00;8
+Living tubo;LI-0005;98.000,00;8
+Living viqui cañamazo;LI-0006;150.000,00;8
+Living viqui dos colores chintz;LI-0007;130.000,00;10
+Living viqui felpa;LI-0008;170.000,00;10
+Living cubo felpa;LI-0009;160.000,00;10
+Living romanito felpa;LI-0010;135.000,00;8
+Living quiteño;LI-0011;96.000,00;8
+Living viqui brocato;LI-0012;150.000,00;10
+Living pingüino;LI-0013;118.000,00;8
+Living oriental brocato;LI-0014;210.000,00;10
+Living oriental chintz;LI-0015;165.000,00;10
+Living Ragu;LI-0016;160.000,00;10
+Living romano cañamazo;LI-0017;186.000,00;10
+Living romano brocato;LI-0018;210.000,00;10
+Living oriental corto;LI-0019;120.000,00;10
+living Genova;LI-0020;140.000,00;10
+Living Steiner;LI-0021;260.000,00;10
+Living romano chenille;LI-0022;160.000,00;10
+Living danés;LI-0023;90.000,00;8
+Living Luis XV;LI-0024;240.000,00;10
+Living bergere cañamazo;LI-0026;196.000,00;10
+Living bergere felpa;LI-0027;200.000,00;10
+Living bergere brocato;LI-0028;196.000,00;10
+Living especial;LI-0029;130.000,00;8
+Living Paris;LI-0030;175.000,00;10
+Living enano;LI-0031;130.000,00;8
+Living enano grande;LI-0032;150.000,00;10
+Living Imperio;LI-0033;240.000,00;10
+Llaves para lavaplatos;LL-0001;9.000,00;4
+Lavaplatos 0,80 melamina;LP-0001;54.000,00;5
+Lavaplatos 1,0 melamina;LP-0002;60.000,00;6
+Lavaplatos 1,20 melamina;LP-0003;40.000,00;6
+Lavaplatos 1 mt. Encina con cajon;LP-0004;64.000,00;6
+Mueble lavaplatos 1 mt.;LP-0005;26.000,00;6
+Mueble lavaplatos 0,8 mt.;LP-0006;20.000,00;5
+Mueble lavaplatos especial;LP-0007;1,00;8
+Cubierta lavaplatos sobreponer 0,80;ls-0001;21.000,00;1
+Cubierta lavaplatos sobreponer 1,0;ls-0002;26.000,00;1
+Cubierta lavaplatos sobreponer 1,2;ls-0003;48.000,00;1
+Cubierta lavaplatos sobreponer especiales;ls-0004;1,00;1
+Cubierta lavaplatos 0,8 empotrar;LS-0005;1,00;1
+Cubierta lavaplatos 1,24 empotrar;LS-0006;1,00;1
+Marqueza marsella 1 plaza;MA-0001;68.000,00;6
+Marqueza marsella 1 1/2 plaza;MA-0002;75.000,00;6
+Marqueza marsella 2 plazas.;MA-0003;88.000,00;6
+Marqueza Catalina 1 plaza;MA-0004;69.000,00;6
+Marqueza Catalina 1 1/2 plaza;MA-0005;78.000,00;6
+Marqueza Catalina 2 plazas;MA-0006;90.000,00;6
+Marqueza cuadrada 1 plaza;MA-0007;58.000,00;6
+Marqueza cuadrada 1 1/2 plaza;MA-0008;60.000,00;6
+Marqueza cuadrada 2 plazas;MA-0009;72.000,00;6
+Marqueza linea plana 1 plaza;MA-0011;58.000,00;6
+Marqueza linea plana 1 1/2 pza;MA-0012;60.000,00;6
+Marqueza linea plana 2 plazas;MA-0013;70.000,00;6
+Marqueza Lux 1 plaza;MA-0014;46.900,00;6
+Marqueza Lux 1 1/2 plaza;MA-0015;78.000,00;6
+Marqueza Lux 2 plazas;MA-0016;66.900,00;6
+Marqueza tranquera 1 plaza;MA-0020;70.000,00;6
+Marqueza tranquera 1 1/2 plaza;MA-0021;85.000,00;6
+Marqueza tranquera 2 plazas;MA-0022;115.000,00;6
+Marqueza Viquing 1 plaza;MA-0026;32.900,00;6
+Marqueza viquing 1 1/2 plaza;MA-0027;36.000,00;6
+Marqueza Viquing 2 plazas.;MA-0028;55.000,00;6
+Marqueza Verónica 1 plaza;MA-0029;32.900,00;6
+Marqueza Verónica 1 1/2 plaza;MA-0030;36.900,00;6
+Marqueza Verónica 2 plazas;MA-0031;45.900,00;6
+Marqueza coigue 1 1/2 plaza;MA-0032;35.000,00;6
+Marqueza media luna 2 plazas.;MA-0033;75.000,00;6
+Marqueza Catalina torneada 1 pza;MA-0041;36.900,00;6
+Marqueza Catalina torneada 1 1/2;MA-0042;36.900,00;6
+Marqueza Catalina torneada 2 pza;MA-0043;55.000,00;6
+Marqueza Imperio 2 plazas;MA-0044;56.000,00;6
+Marqueza especial;MA-0045;1,00;1
+Marqueza Claudio 1 1/2 plaza;MA-0050;52.200,00;6
+Marqueza Abanico 2 plazas.;MA-0051;63.360,00;6
+Marqueza cajonera 1 plaza;MA-0052;56.000,00;6
+Marqueza cajonera 1 1/2 plaza;MA-0053;60.000,00;5
+Marqueza Abanico 1 1/2 Plaza;MA-0054;49.900,00;6
+Marqueza Abanico 2 Plazas;MA-0055;63.360,00;6
+Marqueza cuna;MA-0056;55.000,00;6
+Marqueza Disney 1 pza.;MA-0057;40.000,00;6
+Marqueza Disney 1 1/2 pza.;MA-0058;46.000,00;6
+Mesa centro madera (parra);MC-0001;18.000,00;4
+Mesa centro madera vidrio;MC-0002;25.000,00;4
+Mesa centro vidrio;MC-0003;18.400,00;4
+Mesa centro piña;MC-0004;31.800,00;4
+Mesa centro S;MC-0005;18.000,00;4
+Mesa centro colonial;MC-0006;26.000,00;4
+Mesa centro cónica;MC-0007;27.000,00;4
+Mesa centro madera (bambú);MC-0008;27.000,00;4
+Mudador Disney;MD-0001;48.000,00;5
+Mueble especial;ME-0001;175.000,00;1
+Meson especial;ME-0002;145.000,00;1
+Mesa lateral madera (parra);ML-0001;15.000,00;4
+Mesa lateral madera vidrio;ML-0002;15.000,00;4
+Mesa lateral vidrio;ML-0003;13.200,00;4
+Mesa lateral piña;ML-0005;17.000,00;4
+Mesa lateral madera (bambú);ML-0006;16.000,00;4
+Mesa lateral S;ML-0008;12.600,00;4
+Mesa lateral colonial;ML-0009;14.000,00;4
+Mesa lateral cónica;ML-0010;15.800,00;4
+Mesa plegable chica.;MM-0001;9.000,00;6
+Mesa multiple;MM-0002;18.000,00;4
+Mesa Plegable 0,90 x 0,70;MM-0003;15.000,00;4
+Mesa manicure;MM-0004;1,00;3
+Mesón de cocina 3 cuerpos;MO-0015;26.000,00;6
+Mesa Ping pong;MP-0001;60.000,00;6
+Mueble para pan.;mp-0002;25.000,00;2
+Mesa fija ovalada;MS-0001;30.000,00;5
+Mesa ovalada cristal;MS-0002;42.000,00;5
+Mesa Ovalada Ext. Encina Tab.;MS-0003;100.000,00;8
+Mesa Ovalada Ext.Encina piña;MS-0004;130.000,00;10
+Mesa ovalada extensión Euc.;MS-0005;50.000,00;6
+Mesa redonda cristal;MS-0006;42.000,00;5
+Mesa redonda Ext.Encina piña;MS-0007;130.000,00;10
+Mesa fija melamina 0,94 x 0,67;MS-0008;25.000,00;4
+Mesa redonda Ext.Euc.Balaust.;MS-0009;80.000,00;8
+Mesa fija redonda balaustro;MS-0010;30.000,00;5
+Mesa fija redonda cajón;MS-0011;30.000,00;5
+Arrimo piña;MS-0012;49.000,00;6
+Mesa plegable 0,90x0,90;MS-0013;15.000,00;4
+Mesa Plegable redonda 0,90;MS-0014;14.000,00;4
+Mesa Plegable redonda 0,80;MS-0015;14.000,00;4
+Mesa fija melamina 0,67 X 1,14;MS-0016;35.000,00;6
+Mesa plegable 60*60 blanca;MS-0017;6.500,00;5
+Mesa redonda cristal tubo;MS-0018;49.000,00;6
+Mesa etruzca cristal;MS-0019;51.000,00;6
+Mesa etruzca cristal patinada;MS-0020;69.000,00;6
+Mesa rectangular Ext.Encina piña;MS-0021;130.000,00;10
+Mesa rectangular pino 4 patas.;MS-0022;70.000,00;8
+Mesa teléfono con llave;MT-0001;15.000,00;4
+Mesa teléfono cristal;MT-0002;12.000,00;4
+Mesa teléfono eucaliptus;MT-0003;14.000,00;4
+Mesa televisor corriente;MT-0004;18.000,00;4
+Mesa televisor pino torneado;MT-0005;18.000,00;4
+Mesa televisor euc. Grande;MT-0006;26.000,00;5
+Mesa televisor melamina metal;MT-0007;27.000,00;5
+Mueble base microondas;MU-0001;40.000,00;5
+Mueble cocina B/C 2 Cps. Laca;MU-0002;68.000,00;6
+Mueble cocina B/C 2 Cps. Liso;MU-0003;40.000,00;5
+Mueble cocina B/C 3 Cps. Laca;MU-0004;95.000,00;8
+Mueble cocina B/C 3 Cps. Liso;MU-0005;75.000,00;8
+Mueble cocina comp.2 Cps.laca;MU-0006;45.000,00;6
+Mueble cocina comp.2 Cps.liso;MU-0007;65.000,00;6
+Mueble cocina comp.3 Cps.laca;MU-0008;110.000,00;6
+Mueble cocina comp.3 Cps.liso 0.4;MU-0009;75.000,00;8
+Mueble cocina especial;MU-0010;245.000,00;8
+Mesón de cocina especial;MU-0013;550.000,00;1
+Base mueble cocina 2 cuerpos.;MU-0014;24.000,00;4
+Mueble base cocina 3 cps.;MU-0015;45.000,00;6
+Mueble cocina trupán pintado;MU-0016;33.000,00;5
+Mueble cocina econ. Grande;MU-0017;44.000,00;5
+Mueble de cocina americano;MU-0018;130.000,00;10
+Mueble de cocina compacto soft;MU-0019;65.000,00;8
+Mueble de cocina comp. 3 pts. 0,45;MU-0020;75.000,00;8
+Mesón especial;MU-0021;1,00;1
+Olla a presión Marmicoc 5 lts.;OP-0001;25.800,00;4
+Olla a presión Marmicoc 7 lts.;OP-0002;27.800,00;4
+Pie diferido;PD-0001;1,00;1
+Peinador;PE-0001;52.000,00;6
+Peinador Infantil;PE-0002;34.000,00;6
+Peinador closet;PE-0004;69.000,00;6
+Pouf chico felpa;PF-0001;18.000,00;4
+Pouf romano;PF-0002;21.000,00;4
+Pouf infantil;PF-0003;19.000,00;5
+Piso plegable;PI-0001;4.800,00;4
+Piso argolla cromado;PI-0002;3.500,00;4
+Piso escala;PI-0003;12.000,00;5
+Piso chico;PI-0004;6.000,00;4
+Piso bar;PI-0005;9.500,00;4
+Plumón 1 1/2 plaza;PL-0002;17.600,00;4
+Plumón 2 plazas;PL-0003;21.800,00;4
+Plancha Automática;PL-0004;14.400,00;4
+Plumón Popelina 1 1/2 Plaza;PL-0005;24.900,00;4
+Plumón Popelina 2 Plazas;PL-0006;29.000,00;4
+Perchero;PO-0001;8.000,00;4
+Puerta especial melamina;PU-0001;1.200.000,00;1
+Puerta especial ruteada;PU-0002;8.400,00;1
+Puerta especial posformada;PU-0003;1,00;1
+Plancha a vapor Electrón;PV-0001;18.000,00;4
+Proyecto de cocina;PY-0001;855.000,00;3
+Proyecto de baño;PY-0002;1,00;1
+Proyecto de oficina;PY-0003;1,00;1
+Repisa casita grande;RE-0001;18.000,00;4
+Repisa eucaliptus;RE-0002;21.000,00;4
+Repisa especial;RE-0003;2,00;1
+Repisa casita chica;RE-0004;9.200,00;4
+Rack Nova;RK-0001;32.000,00;5
+Rack chico lacado;RK-0002;31.000,00;5
+Rack esquinero eucaliptus;RK-0003;55.000,00;6
+Rack grande Euc.cub. Giratoria;RK-0004;60.000,00;6
+Rack grande Eucaliptus 1/2luna;RK-0005;50.000,00;6
+Rack grande lacado 1/2 luna;RK-0006;51.000,00;6
+Rack especial;RK-0007;180.000,00;6
+Rack con elevación titanic;RK-0008;78.000,00;8
+Rack manicero;RK-0009;96.000,00;8
+Rack con elevación copero;RK-0010;78.000,00;8
+Rack Epoca;RK-0011;48.000,00;6
+Rack Arturito;RK-0012;25.000,00;5
+Renegociación deuda vencida;RN-0001;2,00;1
+Renegociación deuda vigente;RN-0002;2,00;1
+Ropero dos cuerpos;RO-0001;60.000,00;6
+Ropero tres cuerpos;RO-0002;80.000,00;8
+Ropero melamina dos cuerpos;RO-0003;75.000,00;6
+Ropero melamina tres cuerpos;RO-0004;68.000,00;8
+Ropero niñita;RO-0006;60.000,00;6
+Ropero Disney;RO-0008;60.000,00;8
+Ropero economico trupan;RO-0009;40.000,00;5
+Ropero escritorio;RO-0010;82.000,00;8
+Ropero especial;RO-0011;270.000,00;8
+Reparación mueble;RP-0001;2,00;1
+Respaldo 1 plaza;RS-0001;20.000,00;5
+Respaldo 1 1/2 plaza;RS-0002;22.000,00;6
+Respaldo 2 plazas.;RS-0003;35.000,00;6
+Repisa tubo grande;RT-0001;53.000,00;5
+Sábana 1 plaza lisa;SA-0001;5.524,00;4
+Sábana 1 1/2 plaza lisa;SA-0002;6.132,00;4
+Sábana 2 plazas lisa;SA-0003;8.146,00;4
+Sábana infantil 1 plaza;SA-0004;6.070,00;4
+Sábana 1 plaza estampada;SA-0005;5.524,00;4
+Sábana 1 1/2 plaza estampada;SA-0006;7.850,00;4
+Sábana 2 plazas estampada;SA-0007;9.442,00;4
+Sillón cama 1 plaza;SC-0001;49.320,00;6
+Sillón cama 1 1/2 plaza;SC-0002;57.780,00;6
+Sillón cama 2 plazas;SC-0003;69.910,00;6
+Sillón cama 0,70;SC-0004;35.000,00;6
+Secreter bajo;SE-0001;80.000,00;8
+Secreter alto;SE-0002;90.000,00;8
+Sofá enano;SF-0001;70.000,00;6
+Sofà Paris;SF-0002;95.000,00;8
+Silla especial plegable;SI-0001;8.400,00;6
+Silla Da Vinci;SI-0002;15.000,00;8
+Silla italiana coigue;SI-0004;120.000,00;8
+Silla Vania;SI-0006;78.000,00;8
+Silla viena con respaldo;SI-0007;8.000,00;6
+Silla viena sin respaldo;SI-0008;6.000,00;6
+Silla reina coigue;SI-0009;15.000,00;8
+Silla palillo;SI-0010;13.000,00;8
+Silla italiana encina;SI-0012;20.000,00;8
+Silla colonial, venecia;SI-0013;15.000,00;8
+Silla Bebé madera;SI-0016;11.400,00;4
+Silla tablilla coigue;SI-0018;12.334,00;8
+Silla París;SI-0019;15.000,00;8
+Silla reina metálica;SI-0020;13.000,00;6
+Silla medallón metálica;SI-0021;72.000,00;6
+Sitial medallón metálico;SI-0022;11.668,00;6
+Silla metálica mora;SI-0024;13.000,00;6
+Silla etruzca;SI-0025;15.000,00;8
+Silla italiana eucaliptus;SI-0026;18.334,00;8
+Silla medallón coigue;SI-0027;23.000,00;8
+Silla Pirámide metálica;SI-0028;13.000,00;8
+Silla económica cuadrada;SI-0029;72.000,00;8
+Silla Melipillana;SI-0030;12.000,00;8
+Silla bebé metálica;SI-0031;10.000,00;4
+Silla metálica económica;SI-0032;8.000,00;6
+Silla playa madera;SI-0033;10.800,00;4
+Silla playa madera niño;SI-0034;8.800,00;4
+Sillón Paris;si-0035;38.000,00;6
+Sillón Viqui;SI-0036;38.000,00;6
+Sillón infantil;SI-0037;21.000,00;4
+Sacajugos electrón;SJ-0001;29.800,00;4
+Somier 1 plaza;SO-0001;8.500,00;4
+Somier 1 1/2 plaza;SO-0002;9.500,00;4
+Somier 2 plazas;SO-0003;11.000,00;4
+Somier con patas 1 plaza;SO-0004;35.000,00;1
+Somier con patas 1 1/2 plaza;SO-0005;1,00;1
+Secador de pelo;SP-0001;12.200,00;4
+Sartén chico Marmicoc;ST-0001;14.000,00;4
+Sartén grande Marmicoc;ST-0002;17.800,00;4
+Tabla de planchar simple;TA-0001;7.600,00;4
+Tabla de planchar c/brazo;TA-0002;7.800,00;4
+Toilette metálico;TL-0001;47.500,00;5
+Toallas deportivas;TO-0001;11.000,00;4
+Toallas corrientes;TO-0002;4.256,00;4
+Tetera con pito;TT-0001;13.000,00;4
+Vanitorio simple;VA-0001;230.000,00;5
+Vanitorio especial;VA-0002;1,00;6
+Verdulero simple;VD-0001;18.000,00;4
+Verdulero con puerta;VD-0002;38.000,00;5
+Verdulero especial;VD-0003;1,00;1
+Velador chico;VE-0001;12.000,00;4
+Velador dos cajones;VE-0002;14.000,00;4
+Velador lux;VE-0003;21.000,00;4
+Velador japones;VE-0004;10.000,00;4
+Velador Bebé tres cajones Melamina;VE-0005;14.000,00;4
+Velador tres cajones;VE-0006;15.000,00;4
+Velador especial;VE-0007;1,00;4
+Velador Disney;VE-0008;19.000,00;4
+Vitrina encina;VI-0001;98.000,00;8
+Vitrina lacada;VI-0002;120.000,00;10
+Vitrina especial;VI-0003;104.000,00;8
+Vidrio especial;VI-0004;7.000,00;4
+Vitrina imperio;VI-0005;98.000,00;8
+.-;XX-0000;0,00;1
+Mercaderia desconocida;XX-0001;0,00;1
